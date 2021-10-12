@@ -1,5 +1,10 @@
 /* This file is for your main application CSS */
 /* @import "./phoenix.css"; */
+
+:root{
+  --primary: #fe5f1e;
+  --primary-hover: 1.2;
+}
 @tailwind base;
 
 @tailwind components;
