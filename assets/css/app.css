@@ -4,7 +4,34 @@
 :root{
   --primary: #fe5f1e;
   --primary-hover: 1.2;
+  --secondary: #f8f8f8;
+  --pure: #fff;
+  --dark: #232323;
+  --gray: #ccc;
 }
+
+body{
+  font-family: 'Roboto', sans-serif;
+  --webkit-font-smoothing: antialiased;
+  color: var(--dark);
+}
+
+nav#header-menu li:last-child a{
+  background-color: var(--primary);
+}
+
+nav#header-menu li:last-child a:hover{
+  background-color: var(--primary-hover);
+}
+
+nav li a{
+  transition: all .3s ease-in;
+}
+
+nav li a:hover{
+  color: var(--primary);
+}
+
 @tailwind base;
 
 @tailwind components;
