@@ -8,6 +8,7 @@
   --pure: #fff;
   --dark: #232323;
   --gray: #ccc;
+  --smooth: all .3s ease-in-out;
 }
 
 body{
@@ -25,11 +26,32 @@ nav#header-menu li:last-child a:hover{
 }
 
 nav li a{
-  transition: all .3s ease-in;
+  transition: var(--smooth);
 }
 
 nav li a:hover{
   color: var(--primary);
+}
+
+section.hero{
+  background: var(--secondary);
+}
+
+.size{
+  background: var(--secondary);
+}
+
+.add-to-cart{
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  transition: var(--smooth);
+
+}
+
+.add-to-cart:hover{
+  background: var(--primary);
+  border-color: var(--pure);
+  color: var(--pure);
 }
 
 @tailwind base;
