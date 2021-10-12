@@ -3,6 +3,8 @@
         "deploy": "NODE_ENV=production tailwindcss --postcss --minify --input=css/app.css --output=../priv/static/assets/app.css && cd .. && mix assets.deploy && rm -f _build/esbuild"
     },
     "devDependencies": {
+        "autoprefixer": "^10.3.7",
+        "postcss": "^8.3.9",
         "postcss-import": "^14.0.2",
         "tailwindcss": "^2.2.16"
     }
