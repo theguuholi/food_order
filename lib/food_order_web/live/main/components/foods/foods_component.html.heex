@@ -2,7 +2,7 @@
     <h1 class="text-xl font-bold mb-8">All Foods</h1>
     <div class="grid grid-cols-4 col-gap-12 row-gap-16">
         <%= for _ <- 1..100 do %>
-        <%= render FoodOrderWeb.PageView, "item.html", assigns %>
+        <%= live_component item() %>
         <% end %>
     </div>
 </section>
