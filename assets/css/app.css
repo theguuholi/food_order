@@ -3,7 +3,7 @@
 
 :root{
   --primary: #fe5f1e;
-  --primary-hover: 1.2;
+  --primary-hover: #b23301;
   --secondary: #f8f8f8;
   --pure: #fff;
   --dark: #232323;
@@ -20,10 +20,12 @@ body{
 
 nav#header-menu li:last-child a{
   background-color: var(--primary);
+  color: white
 }
 
 nav#header-menu li:last-child a:hover{
   background-color: var(--primary-hover);
+  color: white
 }
 
 nav li a{
@@ -53,6 +55,15 @@ section.hero{
   background: var(--primary);
   border-color: var(--pure);
   color: var(--pure);
+}
+
+.btn-primary{
+ background: var(--primary); 
+ transition: var(--smooth);
+}
+
+.btn-primary:hover{
+  background-color: var(--primary-hover); 
 }
 
 @tailwind base;
