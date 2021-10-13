@@ -1,0 +1,7 @@
+<section class="cart">
+    <%= if @empty_cart do %>
+    <%= live_component empty_cart() %>
+    <% else %>
+    <%= live_component order() %>
+    <% end %>
+</section>
