@@ -1,11 +1,10 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     FoodOrder.Repo.insert!(%FoodOrder.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
+alias FoodOrder.Products
+
+for _ <- 1..100 do
+  Products.create_product(%{
+    "name" => Faker.Food.dish() <> "#{:rand.uniform(10_000)}",
+    "price" => :rand.uniform(10_000),
+    "description" => Faker.Food.description(),
+    "size" => "small"
+  })
+end
