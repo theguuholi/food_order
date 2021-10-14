@@ -21,12 +21,17 @@ defmodule FoodOrder.ProductsTest do
     end
 
     test "create_product/1 with valid data creates a product" do
-      valid_attrs = %{description: "some description", name: "some name", price: 42, size: "some size"}
+      valid_attrs = %{
+        description: "some description",
+        name: "some name",
+        price: 42,
+        size: "some size"
+      }
 
       assert {:ok, %Product{} = product} = Products.create_product(valid_attrs)
       assert product.description == "some description"
       assert product.name == "some name"
-      assert product.price == 42
+      assert product.price == %Money{amount: 42, currency: :USD}
       assert product.size == "some size"
     end
 
@@ -36,12 +41,18 @@ defmodule FoodOrder.ProductsTest do
 
     test "update_product/2 with valid data updates the product" do
       product = product_fixture()
-      update_attrs = %{description: "some updated description", name: "some updated name", price: 43, size: "some updated size"}
+
+      update_attrs = %{
+        description: "some updated description",
+        name: "some updated name",
+        price: 43,
+        size: "some updated size"
+      }
 
       assert {:ok, %Product{} = product} = Products.update_product(product, update_attrs)
       assert product.description == "some updated description"
       assert product.name == "some updated name"
-      assert product.price == 43
+      assert product.price == %Money{amount: 43, currency: :USD}
       assert product.size == "some updated size"
     end
 
