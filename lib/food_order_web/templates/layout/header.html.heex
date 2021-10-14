@@ -15,9 +15,9 @@
             <li class="ml-6"><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
             <% end %>
             <li class="ml-6 ">
-                <a href="#" class="inline-block px-4 py-2 rounded-full">
+                <%= link to: Routes.cart_path(@conn, :index), class: "inline-block px-4 py-2 rounded-full" do %>
                     <%= render FoodOrderWeb.IconView, "shopping-cart.html" %>
-                </a>
+                <% end %>
             </li>
         </ul>
     </div>
