@@ -66,6 +66,14 @@ section.hero{
   background-color: var(--primary-hover); 
 }
 
+section.cart{
+  background: var(--secondary);
+}
+
+section.cart .amount{
+  color: var(--primary);
+}
+
 @tailwind base;
 
 @tailwind components;

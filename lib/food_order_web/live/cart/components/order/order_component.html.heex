@@ -1,7 +1,13 @@
 <div class="order container mx-auto w-1/2">
     <div class="flex items-center border-b border-gray-300 pb-4">
-        cart-image-from-tailwind
+        <%= render FoodOrderWeb.IconView, "shopping-cart.html", assigns %>
         <h1 class="font-bold ml-4 text-2xl">Order Summary</h1>
     </div>
-
+    <div class="order-list">
+        <%= for _ <- 1..4 do %>
+        <%= live_component order_item() %>
+        <% end %>
+    </div>
+    <hr>
+    <%= live_component confirm_order() %>
 </div>
