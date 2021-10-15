@@ -9,5 +9,4 @@ defmodule FoodOrderWeb.Main.Components.FoodsComponentTest do
     assert is_there_id_with_text?(view, "#food-detail-text", "All Foods")
     assert has_element?(view, "#food-detail-products")
   end
-
 end

@@ -17,8 +17,13 @@ defmodule FoodOrderWeb.Main.Components.Foods.ItemComponentTest do
     assert is_there_id_with_text?(view, "#food-item-name-#{product.id}", product.name)
     assert is_there_id_with_text?(view, "#food-item-size-#{product.id}", product.size)
     assert is_there_id_with_text?(view, "#food-item-size-#{product.id}", product.size)
-    assert is_there_id_with_text?(view, "#food-item-price-#{product.id}", Money.to_string(product.price))
+
+    assert is_there_id_with_text?(
+             view,
+             "#food-item-price-#{product.id}",
+             Money.to_string(product.price)
+           )
+
     assert is_there_id_with_text?(view, "#food-item-add-#{product.id}", "add")
   end
-
 end
