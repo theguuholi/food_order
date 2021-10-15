@@ -1,8 +1,8 @@
-<section class="menu container mx-auto py-8">
-    <h1 class="text-xl font-bold mb-8">All Foods</h1>
-    <div class="grid grid-cols-4 col-gap-12 row-gap-16">
+<section class="menu container mx-auto py-8" id="food-detail">
+    <h1 class="text-xl font-bold mb-8" id="food-detail-text">All Foods</h1>
+    <div class="grid grid-cols-4 col-gap-12 row-gap-16"id="food-detail-products">
         <%= for product <- @products do %>
-        <%= live_component item(), product: product %>
+        <%= live_component item(), id: product.id, product: product %>
         <% end %>
     </div>
 </section>

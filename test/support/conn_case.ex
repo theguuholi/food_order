@@ -24,6 +24,7 @@ defmodule FoodOrderWeb.ConnCase do
       import Plug.Conn
       import Phoenix.ConnTest
       import FoodOrderWeb.ConnCase
+      import FoodOrder.Utils.LiveViewUtils
 
       alias FoodOrderWeb.Router.Helpers, as: Routes
 

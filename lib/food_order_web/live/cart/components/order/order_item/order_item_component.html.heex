@@ -1,9 +1,9 @@
-<div class="flex items-center my-8 shadow-lg p-2">
+<div class="flex items-center my-8 shadow-lg p-2" id={"order-item-" <> @order_item}>
     <img class="w-24" src={Routes.static_path(@socket, "/images/food.svg" )} alt="">
-    <div class="flex-1 ml-4">
-        <h1>Hamburguer</h1>
-        <span>Big</span>
+    <div class="flex-1 ml-4" id={"order-item-details-" <> @order_item}>
+        <h1 id={"order-item-details-name-" <> @order_item}>Hamburguer</h1>
+        <span id={"order-item-details-size-" <> @order_item}>Big</span>
     </div>
-    <span class="flex-1">1 Pcs</span>
-    <span class="font-bold text-lg">$ 20</span>
+    <span class="flex-1" id={"order-item-details-amount-" <> @order_item}>1 Pcs</span>
+    <span class="font-bold text-lg" id={"order-item-details-price-" <> @order_item}>$ 20</span>
 </div>
