@@ -5,7 +5,12 @@
         <span class="size py-1 px-4 rounded-full uppercase text-xs" id={"food-item-size-" <> @product.id}><%= @product.size %></span>
         <div class="flex items-center justify-around mt-6">
             <span class="font-bold text-lg" id={"food-item-price-" <> @product.id}><%= Money.to_string(@product.price) %></span>
-            <button class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold" id={"food-item-add-" <> @product.id}>
+            <button
+                class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold"
+                id={"food-item-add-" <> @product.id}
+                phx-click="add"
+                phx-target={@myself}
+                >
                 <span>+</span>
                 <span class="ml-4">add</span>
             </button>
