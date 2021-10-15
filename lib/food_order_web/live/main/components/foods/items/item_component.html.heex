@@ -1,11 +1,11 @@
-<div class="w-64 shadow-lg rounded-lg p-4" id="food-item">
+<div class="w-64 shadow-lg rounded-lg p-4" id={"food-item-" <> @product.id}>
     <img src={Routes.static_path(@socket, "/images/food.svg" )} alt="" class="h-40 mb-4 mx-auto">
     <div class="text-center">
-        <h2 class="mb-4 text-lg"><%= @product.name %></h2>
-        <span class="size py-1 px-4 rounded-full uppercase text-xs"><%= @product.size %></span>
+        <h2 class="mb-4 text-lg" id={"food-item-name-" <> @product.id}><%= @product.name %></h2>
+        <span class="size py-1 px-4 rounded-full uppercase text-xs" id={"food-item-size-" <> @product.id}><%= @product.size %></span>
         <div class="flex items-center justify-around mt-6">
-            <span class="font-bold text-lg"><%= Money.to_string(@product.price) %></span>
-            <button class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold">
+            <span class="font-bold text-lg" id={"food-item-price-" <> @product.id}><%= Money.to_string(@product.price) %></span>
+            <button class="add-to-cart py-1 px-6 rounded-full flex items-center font-bold" id={"food-item-add-" <> @product.id}>
                 <span>+</span>
                 <span class="ml-4">add</span>
             </button>
