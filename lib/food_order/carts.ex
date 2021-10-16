@@ -1,20 +1,14 @@
 defmodule FoodOrder.Carts do
-  def update_cart(product) do
+  def update_cart(product, cart_token) do
     cart = %{
       items: [
         %{
           product: product,
-          qty: 0
+          qty: 1
         },
         total_qty: 0,
         total_price: 0
       ]
     }
-
-    # for the first time create a cart and adding basic object structure
-    #if !session.cart  create one
-    # else
-    #
-    cart
   end
 end

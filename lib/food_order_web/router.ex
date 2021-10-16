@@ -20,8 +20,11 @@ defmodule FoodOrderWeb.Router do
   scope "/", FoodOrderWeb do
     pipe_through :browser
 
+    live_session :cart, on_mount: FoodOrderWeb.CartItems  do
     live "/", MainLive, :index
-    live "/cart", CartLive, :index
+
+      live "/cart", CartLive, :index
+    end
   end
 
   # Other scopes may use custom stacks.
