@@ -1,6 +1,7 @@
 defmodule FoodOrder.Carts.Boundaries.CartSession do
   use GenServer
   alias FoodOrder.Carts.Core.UpdateCart
+  alias FoodOrder.Carts.Core.NewCart
 
   def start_link(_), do: GenServer.start_link(__MODULE__, :cart_session, name: :cart_session)
 
@@ -10,7 +11,11 @@ defmodule FoodOrder.Carts.Boundaries.CartSession do
   end
 
   def handle_cast({:insert, user_id}, name) do
-    :ets.insert(name, {user_id, UpdateCart.new()})
+    case get_list(name, user_id) do
+      {:not_found, []} -> :ets.insert(name, {user_id, NewCart.new()})
+      {:ok, _value} -> :return_cache
+    end
+
     {:noreply, name}
   end
 

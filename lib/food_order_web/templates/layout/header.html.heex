@@ -15,8 +15,11 @@
             <li class="ml-6"><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
             <% end %>
             <li class="ml-6 ">
-                <%= link to: Routes.cart_path(@conn, :index), class: "inline-block px-4 py-2 rounded-full" do %>
-                    <%= render FoodOrderWeb.IconView, "shopping-cart.html" %>
+                <%= link to: Routes.cart_path(@conn, :index), class: "inline-block px-4 py-2 rounded-full flex items-center" do %>
+                <span class="text-white font-bold pr-2 text-xs" id="cart-counter">
+                    <%= FoodOrder.Carts.get_cart("user123").total_qty %>
+                </span>
+                <%= render FoodOrderWeb.IconView, "shopping-cart.html" %>
                 <% end %>
             </li>
         </ul>

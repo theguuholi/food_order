@@ -18,6 +18,7 @@ defmodule FoodOrderWeb.Main.Components.Foods.ItemComponent do
 
   def handle_event("add", _params, socket) do
     update_cart(socket, socket.assigns.user)
+    socket = put_flash(socket, :info, "Item added to cart")
     {:noreply, socket}
   end
 end
