@@ -1,7 +1,7 @@
 defmodule FoodOrder.Carts.Boundaries.CartSession do
   use GenServer
-  alias FoodOrder.Carts.Core.UpdateCart
   alias FoodOrder.Carts.Core.NewCart
+  alias FoodOrder.Carts.Core.UpdateCart
 
   def start_link(_), do: GenServer.start_link(__MODULE__, :cart_session, name: :cart_session)
 
