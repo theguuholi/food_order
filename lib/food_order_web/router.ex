@@ -13,9 +13,9 @@ defmodule FoodOrderWeb.Router do
     plug :fetch_current_user
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
+  # pipeline :api do
+  #   plug :accepts, ["json"]
+  # end
 
   scope "/", FoodOrderWeb do
     pipe_through :browser
@@ -39,14 +39,14 @@ defmodule FoodOrderWeb.Router do
   # If your application does not have an admins-only section yet,
   # you can use Plug.BasicAuth to set up some basic authentication
   # as long as you are also using SSL (which you should anyway).
-  if Mix.env() in [:dev, :test] do
-    import Phoenix.LiveDashboard.Router
+  # if Mix.env() in [:dev, :test] do
+  #   import Phoenix.LiveDashboard.Router
 
-    scope "/" do
-      pipe_through :browser
-      live_dashboard "/dashboard", metrics: FoodOrderWeb.Telemetry
-    end
-  end
+  #   scope "/" do
+  #     pipe_through :browser
+  #     live_dashboard "/dashboard", metrics: FoodOrderWeb.Telemetry
+  #   end
+  # end
 
   # Enables the Swoosh mailbox preview in development.
   #
