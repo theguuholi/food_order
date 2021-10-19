@@ -17,7 +17,9 @@
             <li class="ml-6 ">
                 <%= link to: Routes.cart_path(@conn, :index), class: "inline-block px-4 py-2 rounded-full flex items-center" do %>
                 <span class="text-white font-bold pr-2 text-xs" id="cart-counter">
+                    <%= if FoodOrder.Carts.get_cart("user123") != {:not_found, []} do %>
                     <%= FoodOrder.Carts.get_cart("user123").total_qty %>
+                    <% end %>
                 </span>
                 <%= render FoodOrderWeb.IconView, "shopping-cart.html" %>
                 <% end %>

@@ -4,6 +4,10 @@ defmodule FoodOrder.Carts.Boundaries.CartSessionApiTest do
 
   alias FoodOrder.Carts.Boundaries.CartSessionApi
 
+  test "should return error" do
+    assert {:not_found, []} == CartSessionApi.get(2_232_323)
+  end
+
   test "should create session" do
     assert :ok == CartSessionApi.insert(333)
   end
