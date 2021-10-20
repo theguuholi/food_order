@@ -1,7 +1,7 @@
 defmodule FoodOrder.Carts.Core.UpdateCartTest do
   use FoodOrder.DataCase
-  alias FoodOrder.Carts.Data.Cart
   alias FoodOrder.Carts.Core.UpdateCart
+  alias FoodOrder.Carts.Data.Cart
   import FoodOrder.Factory
 
   describe "update cart" do

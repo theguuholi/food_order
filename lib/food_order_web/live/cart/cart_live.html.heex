@@ -1,7 +1,7 @@
 <section class="cart py-16">
-    <%= if @empty_cart do %>
+    <%= if @order.total_qty == 0 do %>
     <%= live_component empty_cart() %>
     <% else %>
-    <%= live_component order() %>
+    <%= live_component order(), order: @order %>
     <% end %>
 </section>

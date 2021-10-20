@@ -1,10 +1,12 @@
 defmodule FoodOrderWeb.CartLive do
   use FoodOrderWeb, :live_view
+  alias FoodOrder.Carts
   alias FoodOrderWeb.Cart.Components.EmptyCartComponent
   alias FoodOrderWeb.Cart.Components.OrderComponent
 
   def mount(_assign, _session, socket) do
-    {:ok, socket |> assign(empty_cart: false)}
+    order = Carts.get_cart("user123")
+    {:ok, socket |> assign(order: order)}
   end
 
   def empty_cart, do: EmptyCartComponent
