@@ -10,7 +10,7 @@ defmodule FoodOrderWeb.Endpoint do
     signing_salt: "n1ibdbe7"
   ]
 
-  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [session: @session_options]]
+  socket "/live", Phoenix.LiveView.Socket, websocket: [connect_info: [:peer_data, session: @session_options]]
 
   # Serve at "/" the static files from "priv/static" directory.
   #

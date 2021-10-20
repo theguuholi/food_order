@@ -4,6 +4,20 @@
         <h1 id={"order-item-details-name-" <> @item.item.id}><%= @item.item.name %></h1>
         <span id={"order-item-details-size-" <> @item.item.id}><%= @item.item.size %></span>
     </div>
-    <span class="flex-1" id={"order-item-details-amount-" <> @item.item.id}><%= @item.qty %> Pcs</span>
-    <span class="font-bold text-lg" id={"order-item-details-price-" <> @item.item.id}><%= @item.item.price %></span>
+    <span class="flex-1" id={"order-item-details-events-" <> @item.item.id}>
+        <div class="flex items-center">
+            <button phx-target={@myself} phx-click="dec" class="p-1 m-2 rounded-full text-white font-bold btn-primary"
+                id={"order-item-details-dec-" <> @item.item.id}>-</button>
+            <div id={"order-item-details-amount-" <> @item.item.id}> <%= @item.qty %> Pcs </div>
+            <button phx-target={@myself} phx-click="inc" class="p-1 m-2 rounded-full text-white font-bold btn-primary"
+                id={"order-item-details-inc-" <> @item.item.id}>+</button>
+        </div>
+    </span>
+    <div class="flex-1" id={"order-item-details-info-" <> @item.item.id}>
+        <span class="font-bold text-lg" id={"order-item-details-price-" <> @item.item.id}><%= @item.item.price %></span>
+        <button phx-target={@myself} phx-click="remove" class="w-6 h-6 rounded-full text-white font-bold btn-primary">
+            &#10006
+        </button>
+    </div>
+
 </div>
