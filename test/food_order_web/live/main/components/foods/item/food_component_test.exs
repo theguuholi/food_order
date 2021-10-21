@@ -3,6 +3,8 @@ defmodule FoodOrderWeb.Main.Components.Foods.ItemComponentTest do
   import Phoenix.LiveViewTest
   import FoodOrder.Factory
 
+  alias FoodOrder.Carts
+
   test "should load the load item information", %{conn: conn} do
     product = insert(:product)
     product_2 = insert(:product)
@@ -25,5 +27,20 @@ defmodule FoodOrderWeb.Main.Components.Foods.ItemComponentTest do
            )
 
     assert is_there_id_with_text?(view, "#food-item-add-#{product.id}", "add")
+  end
+
+  test "should load add new item to the cart", %{conn: conn} do
+    product = insert(:product)
+    Carts.create_session("user123")
+    Carts.update_cart(product, "user123")
+    {:ok, view, _html} = live(conn, "/")
+
+    {:ok, _, html} =
+      view
+      |> element("#food-item-add-#{product.id}", "add")
+      |> render_click()
+      |> follow_redirect(conn, "/")
+
+    assert html =~ "Item added to cart"
   end
 end

@@ -4,10 +4,10 @@
         <h1 class="font-bold ml-4 text-2xl">Order Summary</h1>
     </div>
     <div class="order-list">
-        <%= for i <- 1..4 do %>
-        <%= live_component order_item(), order_item: Integer.to_string(i) %>
+        <%= for item <- @order.items do %>
+        <%= live_component order_item(), id: "order-item-#{item.item.id}", item: item %>
         <% end %>
     </div>
     <hr>
-    <%= live_component confirm_order() %>
+    <%= live_component confirm_order(), order: @order %>
 </div>
