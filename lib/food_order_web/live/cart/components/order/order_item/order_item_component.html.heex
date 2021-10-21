@@ -8,7 +8,7 @@
         <div class="flex items-center">
             <button phx-target={@myself} phx-click="dec" class="p-1 m-2 rounded-full text-white font-bold btn-primary"
                 id={"order-item-details-dec-" <> @item.item.id}>-</button>
-            <div id={"order-item-details-amount-" <> @item.item.id}> <%= @item.qty %> Pcs </div>
+            <div id={"order-item-details-amount-" <> @item.item.id}> <%= @item.qty %> Item(s) </div>
             <button phx-target={@myself} phx-click="inc" class="p-1 m-2 rounded-full text-white font-bold btn-primary"
                 id={"order-item-details-inc-" <> @item.item.id}>+</button>
         </div>

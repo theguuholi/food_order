@@ -10,10 +10,10 @@ defmodule FoodOrder.Carts.Boundaries.CartSessionTest do
   end
 
   test "should create a new session" do
-    result = GenServer.cast(:cart_session, {:insert, 123})
+    result = GenServer.cast(:cart_session, {:insert, 43_434_433})
     assert :ok == result
 
-    result = GenServer.call(:cart_session, {:get, 123})
+    result = GenServer.call(:cart_session, {:get, 43_434_433})
     assert {:ok, %Cart{}} == result
   end
 

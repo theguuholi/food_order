@@ -3,6 +3,8 @@ defmodule FoodOrderWeb.Main.Components.Foods.ItemComponentTest do
   import Phoenix.LiveViewTest
   import FoodOrder.Factory
 
+  alias FoodOrder.Carts
+
   test "should load the load item information", %{conn: conn} do
     product = insert(:product)
     product_2 = insert(:product)
@@ -29,6 +31,8 @@ defmodule FoodOrderWeb.Main.Components.Foods.ItemComponentTest do
 
   test "should load add new item to the cart", %{conn: conn} do
     product = insert(:product)
+    Carts.create_session("user123")
+    Carts.update_cart(product, "user123")
     {:ok, view, _html} = live(conn, "/")
 
     {:ok, _, html} =

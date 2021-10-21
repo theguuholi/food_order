@@ -4,18 +4,23 @@ defmodule FoodOrderWeb.CartItems do
 
   def mount(_params, _session, socket) do
     user =
-      if info = get_connect_info(socket) do
-        ip =
-          info.peer_data.address
-          |> Tuple.to_list()
-          |> Enum.map(&Integer.to_string/1)
-          |> List.to_string()
+      cond do
+        Mix.env() == :test ->
+          "user123"
 
-        Carts.create_session(ip)
-        ip
-      else
-        Carts.create_session("user123")
-        "user123"
+        info = get_connect_info(socket) ->
+          ip =
+            info.peer_data.address
+            |> Tuple.to_list()
+            |> Enum.map(&Integer.to_string/1)
+            |> List.to_string()
+
+          Carts.create_session(ip)
+          ip
+
+        true ->
+          Carts.create_session("user123")
+          "user123"
       end
 
     {:cont, assign(socket, user: user)}
