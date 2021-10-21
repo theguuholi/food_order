@@ -1,4 +1,4 @@
-defmodule FoodOrderWeb.ProductItemComponentTest do
+defmodule FoodOrderWeb.Products.ProductItemComponentTest do
   use FoodOrderWeb.ConnCase
   import Phoenix.LiveViewTest
   import FoodOrder.Factory

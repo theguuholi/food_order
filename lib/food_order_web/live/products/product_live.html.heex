@@ -1,3 +1,12 @@
+<%= if @live_action in [:new, :edit] do %>
+<%= live_modal new_product(),
+    id: @product.id || :new,
+    title: @page_title,
+    action: @live_action,
+    product: @product,
+    return_to: Routes.product_path(@socket, :index) %>
+<% end %>
+
 <section class="container mx-auto p-6 font-mono">
     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
         <div class="w-full overflow-x-auto">
@@ -10,9 +19,7 @@
                         <th class="px-4 py-3">Size</th>
                         <th class="px-4 py-3">
                             Actions
-                            <button id="add-new-product" class="px-3 py-1 rounded-full text-white font-bold btn-primary">
-                                New
-                            </button>
+                            <%= live_patch "New", to: Routes.product_path(@socket, :new), id: "add-new-product", class: "px-3 py-1 rounded-full text-white font-bold btn-primary" %>
                         </th>
                     </tr>
                 </thead>

@@ -49,8 +49,8 @@ defmodule FoodOrder.Products do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_product(attrs \\ %{}) do
-    %Product{}
+  def create_product(product, attrs \\ %{}) do
+    product
     |> Product.changeset(attrs)
     |> Repo.insert()
   end
