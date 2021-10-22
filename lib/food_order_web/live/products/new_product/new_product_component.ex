@@ -26,6 +26,7 @@ defmodule FoodOrderWeb.Products.NewProductComponent do
       File.cp!(meta.path, dest)
       # Routes.static_path(socket, "/uploads/#{filename(entry)}")
     end)
+
     {:ok, product}
   end
 
