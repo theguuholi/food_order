@@ -49,6 +49,13 @@ defmodule FoodOrder.Products do
       {:error, %Ecto.Changeset{}}
 
   """
+  def create_product(attrs \\ %{}) do
+    %Product{}
+    |> Product.changeset(attrs)
+    |> Repo.insert()
+    |> broadcast(:product_created)
+  end
+
   def create_product(product, attrs \\ %{}, fun) do
     product
     |> Product.changeset(attrs)

@@ -47,7 +47,7 @@ defmodule FoodOrderWeb.Products.NewProductComponent do
     product = %Product{socket.assigns.product | photos_url: completed_entries(socket)}
 
     case Products.create_product(product, product_parms, &consume_photos(socket, &1)) do
-      {:ok, product} ->
+      {:ok, _product} ->
         {:noreply,
          socket
          |> put_flash(:info, "Product created successfully")
