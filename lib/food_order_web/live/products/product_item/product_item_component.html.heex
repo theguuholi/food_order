@@ -1,12 +1,12 @@
 <tr class="text-gray-700" id={"product-item-" <> @product.id}>
     <td class="px-4 py-3 border">
         <div class="flex items-center text-sm">
-            <div class="relative w-8 h-8 mr-3 rounded-full" id={"photo-image" <> @product.id} >
+            <div class="relative w-12 h-12 mr-3 rounded-full" id={"photo-image" <> @product.id} >
                 <%= if Enum.empty?(@product.photos_url) do  %>
                 <img src={Routes.static_path(@socket, "/images/food.svg" )} alt=""
                     class="object-cover w-full h-full rounded-full" loading="lazy">
                 <% else %>
-                <img src={Routes.static_path(@socket, hd(@product.photos_urls) )} alt=""
+                <img src={Routes.static_path(@socket, hd(@product.photos_url) )} alt=""
                     class="object-cover w-full h-full rounded-full" loading="lazy">
                 <% end %>
                 <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>

@@ -49,12 +49,19 @@ defmodule FoodOrder.Products do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_product(product, attrs \\ %{}) do
+  def create_product(product, attrs \\ %{}, fun) do
     product
     |> Product.changeset(attrs)
     |> Repo.insert()
+    |> after_save(fun)
     |> broadcast(:product_created)
   end
+
+  defp after_save({:ok, product}, fun) do
+    {:ok, _p} = fun.(product)
+  end
+
+  defp after_save(err, _), do: err
 
   def subscribe, do: Phoenix.PubSub.subscribe(FoodOrders.PubSub, "products")
 

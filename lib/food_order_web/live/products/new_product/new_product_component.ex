@@ -1,6 +1,7 @@
 defmodule FoodOrderWeb.Products.NewProductComponent do
   use FoodOrderWeb, :live_component
   alias FoodOrder.Products
+  alias FoodOrder.Products.Product
 
   @impl true
   def update(%{product: product} = assigns, socket) do
@@ -19,9 +20,33 @@ defmodule FoodOrderWeb.Products.NewProductComponent do
      |> assign(:changeset, changeset)}
   end
 
+  defp consume_photos(socket, product) do
+    consume_uploaded_entries(socket, :photo, fn meta, entry ->
+      dest = Path.join("priv/static/uploads", filename(entry))
+      File.cp!(meta.path, dest)
+      # Routes.static_path(socket, "/uploads/#{filename(entry)}")
+    end)
+    {:ok, product}
+  end
+
+  defp filename(entry) do
+    ext = MIME.extensions(entry.client_type)
+    "#{entry.uuid}.#{ext}"
+  end
+
+  defp completed_entries(socket) do
+    {completed, []} = uploaded_entries(socket, :photo)
+
+    for entry <- completed do
+      Routes.static_path(socket, "/uploads/#{filename(entry)}")
+    end
+  end
+
   defp save_account(socket, :new, product_parms) do
-    case Products.create_product(socket.assigns.product, product_parms) do
-      {:ok, _product} ->
+    product = %Product{socket.assigns.product | photos_url: completed_entries(socket)}
+
+    case Products.create_product(product, product_parms, &consume_photos(socket, &1)) do
+      {:ok, product} ->
         {:noreply,
          socket
          |> put_flash(:info, "Product created successfully")
