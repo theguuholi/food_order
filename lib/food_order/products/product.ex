@@ -9,6 +9,7 @@ defmodule FoodOrder.Products.Product do
     field :name, :string
     field :price, Money.Ecto.Amount.Type
     field :size, :string
+    field :photos_url, {:array, :string}, default: []
 
     timestamps()
   end

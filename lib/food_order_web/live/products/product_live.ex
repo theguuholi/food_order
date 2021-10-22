@@ -8,11 +8,16 @@ defmodule FoodOrderWeb.ProductLive do
   @impl true
   def mount(_assign, _session, socket) do
     products = Products.list_products()
-    {:ok, assign(socket, products: products)}
+    {:ok, assign(socket, products: products), temporary_assigns: [products: []]}
   end
 
   def product_item, do: ProductItemComponent
   def new_product, do: NewProductComponent
+
+  @impl true
+  def handle_info({:product_created, product}, socket) do
+    {:noreply, update(socket, :products, &[product | &1])}
+  end
 
   @impl true
   def handle_params(params, _url, socket) do

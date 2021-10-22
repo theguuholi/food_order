@@ -53,6 +53,16 @@ defmodule FoodOrder.Products do
     product
     |> Product.changeset(attrs)
     |> Repo.insert()
+    |> broadcast(:product_created)
+  end
+
+  def subscribe, do: Phoenix.PubSub.subscribe(FoodOrders.PubSub, "products")
+
+  def broadcast({:error, _} = err, _e), do: err
+
+  def broadcast({:ok, product} = result, event) do
+    Phoenix.PubSub.broadcast(FoodOrder.PubSub, "products", {event, product})
+    result
   end
 
   @doc """

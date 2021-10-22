@@ -23,7 +23,7 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody class="bg-white">
+                <tbody class="bg-white" id="product-list" phx-update="prepend">
                     <%= for product <- @products do %>
                     <%= live_component @socket, product_item(), id: product.id, product: product %>
                     <% end %>
