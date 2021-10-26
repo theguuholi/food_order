@@ -1,0 +1,74 @@
+  <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <.form let={f} for={@changeset} id="product-form" phx-target={@myself} phx-change="validate" phx-submit="save">
+
+          <div class="mb-4">
+              <%= label f, :name, class: "block text-gray-700 text-sm font-bold mb-2" %>
+              <%= text_input f, :name, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+              <%= error_tag f, :name %>
+          </div>
+          <div class="mb-4">
+              <%= label f, :description, class: "block text-gray-700 text-sm font-bold mb-2" %>
+              <%= textarea f, :description, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+              <%= error_tag f, :description %>
+          </div>
+          <div class="mb-4">
+              <%= label f, :price, class: "block text-gray-700 text-sm font-bold mb-2" %>
+              <%= text_input f, :price, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+              <%= error_tag f, :price %>
+          </div>
+          <div class="mb-4">
+              <%= label f, :size, class: "block text-gray-700 text-sm font-bold mb-2" %>
+              <%= text_input f, :size, class: "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" %>
+              <%= error_tag f, :size %>
+          </div>
+
+          <hr class="m-4" />
+
+          <div class="tips">
+              Add up to
+              <%= @uploads.photo.max_entries %>
+              photos (max <%= trunc(@uploads.photo.max_file_size) / 1_000_000 %>) MB each)
+          </div>
+
+          <div class="drop" phx-drop-target={@uploads.photo.ref}>
+              <%= live_file_input @uploads.photo %>
+              or drag and drop here
+          </div>
+
+          <%= for {_ref, err} <- @uploads.photo.errors do %>
+          <div class="error">
+              <%= humanize(err) %>
+          </div>
+          <% end %>
+
+          <%=for entry <- @uploads.photo.entries do %>
+          <div class="flex items-center text-sm">
+              <div class="relative w-32 h-32 mr-3 rounded-full">
+                  <%= live_img_preview entry %>
+                  <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+              </div>
+              <div>
+                  <div class="progress">
+                      <div class="value">
+                          <%= entry.progress %>%
+                      </div>
+                      <div class="bar">
+                          <span style={"width:" <> Integer.to_string(entry.progress) <> "%"}></span>
+                      </div>
+                  </div>
+                  <a href="#" id={"entry-cancel-" <> entry.ref} phx-click="cancel-img" phx-value-ref={entry.ref} phx-target={@myself}>&times;</a>
+                  <%= for err <- upload_errors(@uploads.photo, entry) do %>
+                  <div class="error">
+                      <%= humanize(err) %>
+                  </div>
+                  <% end %>
+              </div>
+              <% end %>
+
+              <hr class="m-4" />
+
+              <div class="flex items-center">
+                  <%= submit "Create new Item", phx_disable_with: "Creating...",  class: "btn-primary rounded-full text-sm  text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" %>
+              </div>
+      </.form>
+  </div>

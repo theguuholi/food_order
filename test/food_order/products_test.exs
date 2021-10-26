@@ -20,6 +20,28 @@ defmodule FoodOrder.ProductsTest do
       assert Products.get_product!(product.id) == product
     end
 
+    test "create_product/3 with invalid data creates a product" do
+      assert {:error, %Ecto.Changeset{}} =
+               Products.create_product(%Product{}, %{}, fn p -> {:error, p} end)
+    end
+
+    test "create_product/3 with valid data creates a product" do
+      valid_attrs = %{
+        description: "some description",
+        name: "some name",
+        price: 42,
+        size: "some size"
+      }
+
+      assert {:ok, %Product{} = product} =
+               Products.create_product(%Product{}, valid_attrs, fn p -> {:ok, p} end)
+
+      assert product.description == "some description"
+      assert product.name == "some name"
+      assert product.price == %Money{amount: 42, currency: :USD}
+      assert product.size == "some size"
+    end
+
     test "create_product/1 with valid data creates a product" do
       valid_attrs = %{
         description: "some description",
