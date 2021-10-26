@@ -1,12 +1,22 @@
 defmodule FoodOrderWeb.CartItems do
   import Phoenix.LiveView
+  alias FoodOrder.Accounts
   alias FoodOrder.Carts
+
+  def mount(_params, %{"user_token" => user_token}, socket) do
+    socket =
+      assign_new(socket, :current_user, fn -> Accounts.get_user_by_session_token(user_token) end)
+
+    Carts.create_session(socket.assigns.current_user.id)
+
+    {:cont, socket}
+  end
 
   def mount(_params, _session, socket) do
     user =
       cond do
         Mix.env() == :test ->
-          "user123"
+          %{id: "user123"}
 
         info = get_connect_info(socket) ->
           ip =
@@ -16,13 +26,13 @@ defmodule FoodOrderWeb.CartItems do
             |> List.to_string()
 
           Carts.create_session(ip)
-          ip
+          %{id: ip}
 
         true ->
           Carts.create_session("user123")
-          "user123"
+          %{id: "user123"}
       end
 
-    {:cont, assign(socket, user: user)}
+    {:cont, assign(socket, current_user: user)}
   end
 end
