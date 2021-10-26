@@ -14,7 +14,6 @@ defmodule FoodOrderWeb.CartItems do
             |> Tuple.to_list()
             |> Enum.map(&Integer.to_string/1)
             |> List.to_string()
-            |> IO.inspect
 
           Carts.create_session(ip)
           ip
