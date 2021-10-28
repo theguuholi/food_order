@@ -26,6 +26,23 @@ defmodule FoodOrder.Carts.Core.UpdateCartTest do
       assert Money.add(product.price, product.price) == result.total_price
     end
 
+    test "should create add the same element into_the cart" do
+      cart = %Cart{}
+      product = insert(:product, %{})
+
+      result =
+        cart
+        |> UpdateCart.execute(product)
+        |> UpdateCart.execute(product)
+        |> UpdateCart.add(product.id)
+
+      assert 3 == result.total_qty
+
+      assert product.price
+             |> Money.add(product.price)
+             |> Money.add(product.price) == result.total_price
+    end
+
     test "should create two different items on the same cart" do
       cart = %Cart{}
       product = insert(:product, %{})
