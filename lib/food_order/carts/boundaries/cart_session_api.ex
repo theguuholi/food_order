@@ -1,11 +1,11 @@
 defmodule FoodOrder.Carts.Boundaries.CartSessionApi do
-  def get(user_id) do
-    case GenServer.call(:cart_session, {:get, user_id}) do
+  def get(cart_id) do
+    case GenServer.call(:cart_session, {:get, cart_id}) do
       {:ok, cart} -> cart
       err -> err
     end
   end
 
-  def update(user_id, product), do: GenServer.cast(:cart_session, {:put, user_id, product})
-  def insert(user_id), do: GenServer.cast(:cart_session, {:insert, user_id})
+  def update(cart_id, product), do: GenServer.cast(:cart_session, {:put, cart_id, product})
+  def insert(cart_id), do: GenServer.cast(:cart_session, {:insert, cart_id})
 end
