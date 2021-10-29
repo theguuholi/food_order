@@ -66,7 +66,8 @@ defmodule FoodOrder.MixProject do
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false},
       {:money, "~> 1.4"},
       {:faker, "~> 0.16", only: [:test, :dev]},
-      {:ex_machina, "~> 2.7.0"}
+      {:ex_machina, "~> 2.7.0"},
+      {:benchee, "~> 1.0", only: :dev}
     ]
   end
 

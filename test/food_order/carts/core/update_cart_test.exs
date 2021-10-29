@@ -26,6 +26,23 @@ defmodule FoodOrder.Carts.Core.UpdateCartTest do
       assert Money.add(product.price, product.price) == result.total_price
     end
 
+    test "should remove element " do
+      cart = %Cart{}
+      product = insert(:product, %{})
+      product_1 = insert(:product, %{})
+
+      result =
+        cart
+        |> UpdateCart.execute(product)
+        |> UpdateCart.execute(product)
+        |> UpdateCart.execute(product_1)
+        |> UpdateCart.remove(product.id)
+
+      assert 1 == result.total_qty
+
+      assert product_1.price == result.total_price
+    end
+
     test "should create add the same element into_the cart" do
       cart = %Cart{}
       product = insert(:product, %{})

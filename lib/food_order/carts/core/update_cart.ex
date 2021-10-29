@@ -1,19 +1,49 @@
 defmodule FoodOrder.Carts.Core.UpdateCart do
   alias FoodOrder.Carts.Data.Cart
 
-  def add(cart, product_id) do
-    items_updated =
+  def remove(cart, product_id) do
+    {items, product_removed} =
       cart.items
-      |> Enum.map(fn item ->
-        if item.item.id == product_id do
-          %{item | qty: item.qty + 1}
+      |> Enum.reduce_while({[], nil}, fn product, acc ->
+        if product.item.id == product_id do
+          {list, _product_acc} = acc
+          {:cont, {list, product}}
         else
-          item
+          {list, product_acc} = acc
+          {:halt, {[product] ++ list, product_acc}}
         end
       end)
 
-    %Cart{cart | items: items_updated, total_qty: cart.total_qty + 1}
-    |> IO.inspect()
+    remove_value = Money.multiply(product_removed.item.price, product_removed.qty)
+
+    %Cart{
+      cart
+      | items: items,
+        total_qty: cart.total_qty - product_removed.qty,
+        total_price: Money.subtract(cart.total_price, remove_value)
+    }
+  end
+
+  def add(cart, product_id) do
+    {items_updated, product} =
+      cart.items
+      |> Enum.reduce_while({[], nil}, fn item, acc ->
+        if item.item.id == product_id do
+          {list, _} = acc
+          item_updated = [%{item | qty: item.qty + 1}]
+          {:cont, {list ++ item_updated, item}}
+        else
+          {list, item_updated} = acc
+          {:halt, {[item] ++ list, item_updated}}
+        end
+      end)
+
+    %Cart{
+      cart
+      | items: items_updated,
+        total_qty: cart.total_qty + 1,
+        total_price: Money.add(cart.total_price, product.item.price)
+    }
   end
 
   def execute(cart, product) do
