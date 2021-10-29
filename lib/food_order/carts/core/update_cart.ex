@@ -1,6 +1,21 @@
 defmodule FoodOrder.Carts.Core.UpdateCart do
   alias FoodOrder.Carts.Data.Cart
 
+  def add(cart, product_id) do
+    items_updated =
+      cart.items
+      |> Enum.map(fn item ->
+        if item.item.id == product_id do
+          %{item | qty: item.qty + 1}
+        else
+          item
+        end
+      end)
+
+    %Cart{cart | items: items_updated, total_qty: cart.total_qty + 1}
+    |> IO.inspect()
+  end
+
   def execute(cart, product) do
     %Cart{
       cart

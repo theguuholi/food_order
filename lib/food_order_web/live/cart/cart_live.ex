@@ -5,7 +5,7 @@ defmodule FoodOrderWeb.CartLive do
   alias FoodOrderWeb.Cart.Components.OrderComponent
 
   def mount(_assign, _session, socket) do
-    order = Carts.get_cart(socket.assigns.user)
+    order = Carts.get_cart(socket.assigns.cart_id)
     {:ok, socket |> assign(order: order)}
   end
 

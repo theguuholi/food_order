@@ -10,14 +10,14 @@ defmodule FoodOrderWeb.Main.Components.Foods.ItemComponent do
     socket.assigns.product
   end
 
-  defp update_cart(socket, user) do
+  defp update_cart(socket, cart_id) do
     socket
     |> get_product()
-    |> Carts.update_cart(user)
+    |> Carts.update_cart(cart_id)
   end
 
   def handle_event("add", _params, socket) do
-    update_cart(socket, socket.assigns.user)
+    update_cart(socket, socket.assigns.cart_id)
 
     socket =
       socket

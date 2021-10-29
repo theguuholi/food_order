@@ -5,7 +5,7 @@ defmodule FoodOrderWeb.Main.Components.FoodsComponent do
 
   def update(assigns, socket) do
     products = Products.list_products()
-    {:ok, assign(socket, products: products, user: assigns.user)}
+    {:ok, socket |> assign(assigns) |> assign(products: products)}
   end
 
   def item, do: ItemComponent

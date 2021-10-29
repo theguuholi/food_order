@@ -10,7 +10,6 @@ defmodule FoodOrderWeb.Cart.Components.Order.OrderItem.OrderItemComponentTest do
     product = insert(:product)
     Carts.create_session("user123")
     Carts.update_cart(product, "user123")
-    :timer.sleep(1_000)
     {:ok, view, _html} = live(conn, "/cart")
 
     assert has_element?(view, "#order-item-#{product.id}")

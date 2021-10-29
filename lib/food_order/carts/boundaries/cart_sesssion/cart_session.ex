@@ -10,31 +10,31 @@ defmodule FoodOrder.Carts.Boundaries.CartSession do
     {:ok, name}
   end
 
-  def handle_cast({:insert, user_id}, name) do
-    case get_list(name, user_id) do
-      {:not_found, []} -> :ets.insert(name, {user_id, NewCart.new()})
+  def handle_cast({:insert, cart_id}, name) do
+    case get_list(name, cart_id) do
+      {:not_found, []} -> :ets.insert(name, {cart_id, NewCart.new()})
       {:ok, _value} -> :return_cache
     end
 
     {:noreply, name}
   end
 
-  def handle_cast({:put, user_id, product}, name) do
-    {:ok, cart} = get_list(name, user_id)
+  def handle_cast({:put, cart_id, product}, name) do
+    {:ok, cart} = get_list(name, cart_id)
     cart = UpdateCart.execute(cart, product)
-    :ets.insert(name, {user_id, cart})
+    :ets.insert(name, {cart_id, cart})
     {:noreply, name}
   end
 
-  def handle_call({:get, user_id}, _from, name) do
-    {:reply, get_list(name, user_id), name}
+  def handle_call({:get, cart_id}, _from, name) do
+    {:reply, get_list(name, cart_id), name}
   end
 
-  defp get_list(name, user_id) do
-    :ets.lookup(name, user_id)
+  defp get_list(name, cart_id) do
+    :ets.lookup(name, cart_id)
     |> case do
       [] -> {:not_found, []}
-      [{_user_id, value}] -> {:ok, value}
+      [{_cart_id, value}] -> {:ok, value}
     end
   end
 end

@@ -2,7 +2,7 @@
     <h1 class="text-xl font-bold mb-8" id="food-detail-text">All Foods</h1>
     <div class="grid grid-cols-4 col-gap-12 row-gap-16"id="food-detail-products">
         <%= for product <- @products do %>
-        <%= live_component item(), id: product.id, product: product, user: @user %>
+        <%= live_component item(), id: product.id, product: product, cart_id: @cart_id %>
         <% end %>
     </div>
 </section>
