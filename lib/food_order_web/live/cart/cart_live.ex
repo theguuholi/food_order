@@ -4,11 +4,13 @@ defmodule FoodOrderWeb.CartLive do
   alias FoodOrderWeb.Cart.Components.EmptyCartComponent
   alias FoodOrderWeb.Cart.Components.OrderComponent
 
-  def mount(_assign, _session, socket) do
-    order = Carts.get_cart(socket.assigns.cart_id)
-    {:ok, socket |> assign(order: order)}
+  def mount(_assigns, _session, socket) do
+    cart_id = socket.assigns.cart_id
+    order = Carts.get_cart(cart_id)
+    {:ok, socket |> assign(order: order) |> assign(cart_id: cart_id)}
   end
 
   def empty_cart, do: EmptyCartComponent
+  @spec order :: FoodOrderWeb.Cart.Components.OrderComponent
   def order, do: OrderComponent
 end

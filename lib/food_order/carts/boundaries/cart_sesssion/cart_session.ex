@@ -26,18 +26,18 @@ defmodule FoodOrder.Carts.Boundaries.CartSession do
     {:noreply, name}
   end
 
-  def handle_cast({:remove, cart_id, product_id}, name) do
+  def handle_call({:remove, cart_id, product_id}, _from, name) do
     {:ok, cart} = get_list(name, cart_id)
     cart = UpdateCart.remove(cart, product_id)
     :ets.insert(name, {cart_id, cart})
-    {:noreply, name}
+    {:reply, cart, name}
   end
 
-  def handle_cast({:add, cart_id, product_id}, name) do
+  def handle_call({:add, cart_id, product_id}, _from, name) do
     {:ok, cart} = get_list(name, cart_id)
     cart = UpdateCart.add(cart, product_id)
     :ets.insert(name, {cart_id, cart})
-    {:noreply, name}
+    {:reply, cart, name}
   end
 
   def handle_call({:get, cart_id}, _from, name) do
