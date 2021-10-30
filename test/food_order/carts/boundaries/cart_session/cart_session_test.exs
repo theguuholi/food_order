@@ -45,10 +45,7 @@ defmodule FoodOrder.Carts.Boundaries.CartSessionTest do
     {:ok, result} = GenServer.call(:cart_session, {:get, session_id})
     assert 3 == result.total_qty
 
-    GenServer.cast(:cart_session, {:add, session_id, product_2.id})
-    {:ok, result} = GenServer.call(:cart_session, {:get, session_id})
-
-    assert 4 == result.total_qty
+    assert 4 == GenServer.call(:cart_session, {:add, session_id, product_2.id}).total_qty
   end
 
   test "should remove item" do
@@ -67,9 +64,6 @@ defmodule FoodOrder.Carts.Boundaries.CartSessionTest do
     {:ok, result} = GenServer.call(:cart_session, {:get, session_id})
     assert 3 == result.total_qty
 
-    GenServer.cast(:cart_session, {:remove, session_id, product_2.id})
-    {:ok, result} = GenServer.call(:cart_session, {:get, session_id})
-
-    assert 2 == result.total_qty
+    assert 2 == GenServer.call(:cart_session, {:remove, session_id, product_2.id}).total_qty
   end
 end

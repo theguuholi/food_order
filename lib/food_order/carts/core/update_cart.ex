@@ -7,7 +7,7 @@ defmodule FoodOrder.Carts.Core.UpdateCart do
       |> Enum.reduce_while({[], nil}, fn product, acc ->
         if product.item.id == product_id do
           {list, _product_acc} = acc
-          {:halt, {list, product}}
+          {:cont, {list, product}}
         else
           {list, product_acc} = acc
           {:cont, {[product] ++ list, product_acc}}
@@ -32,7 +32,7 @@ defmodule FoodOrder.Carts.Core.UpdateCart do
           {list, _} = acc
           updated_item = %{item | qty: item.qty + 1}
           item_updated = [updated_item]
-          {:halt, {list ++ item_updated, updated_item}}
+          {:cont, {list ++ item_updated, updated_item}}
         else
           {list, item_updated} = acc
           {:cont, {[item] ++ list, item_updated}}

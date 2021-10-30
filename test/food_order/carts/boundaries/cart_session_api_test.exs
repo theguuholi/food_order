@@ -25,8 +25,7 @@ defmodule FoodOrder.Carts.Boundaries.CartSessionApiTest do
     assert :ok == CartSessionApi.insert(session_id)
     product = insert(:product, %{})
     assert :ok == CartSessionApi.update(session_id, product)
-    assert :ok == CartSessionApi.add(session_id, product.id)
-    assert 2 == CartSessionApi.get(session_id).total_qty
+    assert 2 == CartSessionApi.add(session_id, product.id).total_qty
   end
 
   test "should remove product and get" do
@@ -35,7 +34,6 @@ defmodule FoodOrder.Carts.Boundaries.CartSessionApiTest do
     assert :ok == CartSessionApi.insert(session_id)
     product = insert(:product, %{})
     assert :ok == CartSessionApi.update(session_id, product)
-    assert :ok == CartSessionApi.remove(session_id, product.id)
-    assert 0 == CartSessionApi.get(session_id).total_qty
+    assert 0 == CartSessionApi.remove(session_id, product.id).total_qty
   end
 end
