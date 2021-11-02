@@ -49,5 +49,6 @@ defmodule FoodOrderWeb.CartItems do
       "user123"
     end
   end
+
   # coveralls-ignore-stop
 end

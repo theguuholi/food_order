@@ -26,5 +26,6 @@ defmodule FoodOrderWeb.ModalComponent do
   def handle_event("close", _, socket) do
     {:noreply, push_patch(socket, to: socket.assigns.return_to)}
   end
+
   # coveralls-ignore-stop
 end
