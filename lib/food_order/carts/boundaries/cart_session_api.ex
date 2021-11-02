@@ -7,6 +7,7 @@ defmodule FoodOrder.Carts.Boundaries.CartSessionApi do
   end
 
   def add(cart_id, product_id), do: GenServer.call(:cart_session, {:add, cart_id, product_id})
+  def dec(cart_id, product_id), do: GenServer.call(:cart_session, {:dec, cart_id, product_id})
 
   def remove(cart_id, product_id),
     do: GenServer.call(:cart_session, {:remove, cart_id, product_id})

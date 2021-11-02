@@ -40,6 +40,13 @@ defmodule FoodOrder.Carts.Boundaries.CartSession do
     {:reply, cart, name}
   end
 
+  def handle_call({:dec, cart_id, product_id}, _from, name) do
+    {:ok, cart} = get_list(name, cart_id)
+    cart = UpdateCart.dec(cart, product_id)
+    :ets.insert(name, {cart_id, cart})
+    {:reply, cart, name}
+  end
+
   def handle_call({:get, cart_id}, _from, name) do
     {:reply, get_list(name, cart_id), name}
   end
