@@ -47,6 +47,33 @@ defmodule FoodOrder.Carts.Core.UpdateCart do
     }
   end
 
+  def dec(cart, product_id) do
+    {items_updated, product} =
+      cart.items
+      |> Enum.reduce({[], nil}, fn item, acc ->
+        if item.item.id == product_id do
+          {list, _} = acc
+          updated_item = %{item | qty: item.qty - 1}
+          if updated_item.qty == 0  do
+            {list, updated_item}
+          else
+            item_updated = [updated_item]
+            {list ++ item_updated, updated_item}
+          end
+        else
+          {list, item_updated} = acc
+          {[item] ++ list, item_updated}
+        end
+      end)
+
+    %Cart{
+      cart
+      | items: items_updated,
+        total_qty: cart.total_qty - 1,
+        total_price: Money.subtract(cart.total_price, product.item.price)
+    }
+  end
+
   def execute(cart, product) do
     %Cart{
       cart
