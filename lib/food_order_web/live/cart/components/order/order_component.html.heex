@@ -5,7 +5,7 @@
     </div>
     <div class="order-list">
         <%= for item <- @order.items do %>
-        <%= live_component order_item(), id: "order-item-#{item.item.id}", item: item %>
+        <%= live_component order_item(), id: "order-item-#{item.item.id}", item: item, cart_id: @cart_id %>
         <% end %>
     </div>
     <hr>

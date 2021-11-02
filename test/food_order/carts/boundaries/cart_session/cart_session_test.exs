@@ -28,4 +28,61 @@ defmodule FoodOrder.Carts.Boundaries.CartSessionTest do
     {:ok, result} = GenServer.call(:cart_session, {:get, 123})
     assert 1 == result.total_qty
   end
+
+  test "should dec item" do
+    session_id = :rand.uniform(1000)
+    result = GenServer.cast(:cart_session, {:insert, session_id})
+    assert :ok == result
+
+    product = insert(:product, %{})
+    product_2 = insert(:product, %{})
+    product_3 = insert(:product, %{})
+
+    GenServer.cast(:cart_session, {:put, session_id, product})
+    GenServer.cast(:cart_session, {:put, session_id, product_2})
+    GenServer.cast(:cart_session, {:put, session_id, product_3})
+
+    {:ok, result} = GenServer.call(:cart_session, {:get, session_id})
+    assert 3 == result.total_qty
+
+    assert 2 == GenServer.call(:cart_session, {:dec, session_id, product_2.id}).total_qty
+  end
+
+  test "should add item" do
+    session_id = :rand.uniform(1000)
+    result = GenServer.cast(:cart_session, {:insert, session_id})
+    assert :ok == result
+
+    product = insert(:product, %{})
+    product_2 = insert(:product, %{})
+    product_3 = insert(:product, %{})
+
+    GenServer.cast(:cart_session, {:put, session_id, product})
+    GenServer.cast(:cart_session, {:put, session_id, product_2})
+    GenServer.cast(:cart_session, {:put, session_id, product_3})
+
+    {:ok, result} = GenServer.call(:cart_session, {:get, session_id})
+    assert 3 == result.total_qty
+
+    assert 4 == GenServer.call(:cart_session, {:add, session_id, product_2.id}).total_qty
+  end
+
+  test "should remove item" do
+    session_id = :rand.uniform(1000)
+    result = GenServer.cast(:cart_session, {:insert, session_id})
+    assert :ok == result
+
+    product = insert(:product, %{})
+    product_2 = insert(:product, %{})
+    product_3 = insert(:product, %{})
+
+    GenServer.cast(:cart_session, {:put, session_id, product})
+    GenServer.cast(:cart_session, {:put, session_id, product_2})
+    GenServer.cast(:cart_session, {:put, session_id, product_3})
+
+    {:ok, result} = GenServer.call(:cart_session, {:get, session_id})
+    assert 3 == result.total_qty
+
+    assert 2 == GenServer.call(:cart_session, {:remove, session_id, product_2.id}).total_qty
+  end
 end

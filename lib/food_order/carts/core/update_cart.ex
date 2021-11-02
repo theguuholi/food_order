@@ -4,13 +4,13 @@ defmodule FoodOrder.Carts.Core.UpdateCart do
   def remove(cart, product_id) do
     {items, product_removed} =
       cart.items
-      |> Enum.reduce_while({[], nil}, fn product, acc ->
+      |> Enum.reduce({[], nil}, fn product, acc ->
         if product.item.id == product_id do
           {list, _product_acc} = acc
-          {:cont, {list, product}}
+          {list, product}
         else
           {list, product_acc} = acc
-          {:halt, {[product] ++ list, product_acc}}
+          {[product] ++ list, product_acc}
         end
       end)
 
@@ -27,14 +27,15 @@ defmodule FoodOrder.Carts.Core.UpdateCart do
   def add(cart, product_id) do
     {items_updated, product} =
       cart.items
-      |> Enum.reduce_while({[], nil}, fn item, acc ->
+      |> Enum.reduce({[], nil}, fn item, acc ->
         if item.item.id == product_id do
           {list, _} = acc
-          item_updated = [%{item | qty: item.qty + 1}]
-          {:cont, {list ++ item_updated, item}}
+          updated_item = %{item | qty: item.qty + 1}
+          item_updated = [updated_item]
+          {list ++ item_updated, updated_item}
         else
           {list, item_updated} = acc
-          {:halt, {[item] ++ list, item_updated}}
+          {[item] ++ list, item_updated}
         end
       end)
 
@@ -43,6 +44,34 @@ defmodule FoodOrder.Carts.Core.UpdateCart do
       | items: items_updated,
         total_qty: cart.total_qty + 1,
         total_price: Money.add(cart.total_price, product.item.price)
+    }
+  end
+
+  def dec(cart, product_id) do
+    {items_updated, product} =
+      cart.items
+      |> Enum.reduce({[], nil}, fn item, acc ->
+        if item.item.id == product_id do
+          {list, _} = acc
+          updated_item = %{item | qty: item.qty - 1}
+
+          if updated_item.qty == 0 do
+            {list, updated_item}
+          else
+            item_updated = [updated_item]
+            {list ++ item_updated, updated_item}
+          end
+        else
+          {list, item_updated} = acc
+          {[item] ++ list, item_updated}
+        end
+      end)
+
+    %Cart{
+      cart
+      | items: items_updated,
+        total_qty: cart.total_qty - 1,
+        total_price: Money.subtract(cart.total_price, product.item.price)
     }
   end
 

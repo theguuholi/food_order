@@ -60,6 +60,38 @@ defmodule FoodOrder.Carts.Core.UpdateCartTest do
              |> Money.add(product.price) == result.total_price
     end
 
+    test "should create dec the same element into_the cart" do
+      cart = %Cart{}
+      product = insert(:product, %{})
+
+      result =
+        cart
+        |> UpdateCart.execute(product)
+        |> UpdateCart.execute(product)
+        |> UpdateCart.dec(product.id)
+
+      assert 1 == result.total_qty
+
+      assert product.price
+             |> Money.add(product.price)
+             |> Money.subtract(product.price) == result.total_price
+    end
+
+    test "should create dec until remove the element" do
+      cart = %Cart{}
+      product = insert(:product, %{})
+
+      result =
+        cart
+        |> UpdateCart.execute(product)
+        |> UpdateCart.execute(product)
+        |> UpdateCart.dec(product.id)
+        |> UpdateCart.dec(product.id)
+
+      assert 0 == result.total_qty
+      assert Money.new(0) == result.total_price
+    end
+
     test "should create two different items on the same cart" do
       cart = %Cart{}
       product = insert(:product, %{})

@@ -33,17 +33,22 @@ defmodule FoodOrderWeb.CartItems do
     end
   end
 
+  # coveralls-ignore-start
   defp get_ip(socket) do
-    if info = get_connect_info(socket) && Mix.env() != :test do
-      ip =
-        info.peer_data.address
-        |> Tuple.to_list()
-        |> Enum.map(&Integer.to_string/1)
-        |> List.to_string()
+    if Mix.env() != :test do
+      if info = get_connect_info(socket) do
+        ip =
+          info.peer_data.address
+          |> Tuple.to_list()
+          |> Enum.map(&Integer.to_string/1)
+          |> List.to_string()
 
-      ip
+        ip
+      end
     else
       "user123"
     end
   end
+
+  # coveralls-ignore-stop
 end
