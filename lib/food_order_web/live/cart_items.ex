@@ -33,6 +33,7 @@ defmodule FoodOrderWeb.CartItems do
     end
   end
 
+  # coveralls-ignore-start
   defp get_ip(socket) do
     if Mix.env() != :test do
       if info = get_connect_info(socket) do
@@ -48,4 +49,5 @@ defmodule FoodOrderWeb.CartItems do
       "user123"
     end
   end
+  # coveralls-ignore-stop
 end

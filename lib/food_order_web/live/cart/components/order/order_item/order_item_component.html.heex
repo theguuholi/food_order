@@ -6,16 +6,19 @@
     </div>
     <span class="flex-1" id={"order-item-details-events-" <> @item.item.id}>
         <div class="flex items-center">
-            <button phx-target={@myself} phx-click="dec" class="p-1 m-2 rounded-full text-white font-bold btn-primary"
-                id={"order-item-details-dec-" <> @item.item.id}>-</button>
+            <button phx-target={@myself} phx-click="dec" phx-value-product_id={@item.item.id}
+                class="p-1 m-2 rounded-full text-white font-bold btn-primary" id={"order-item-details-dec-" <>
+                @item.item.id}>-</button>
             <div id={"order-item-details-amount-" <> @item.item.id}> <%= @item.qty %> Item(s) </div>
-            <button phx-target={@myself} phx-click="inc" phx-value-product_id={@item.item.id} class="p-1 m-2 rounded-full text-white font-bold btn-primary"
-                id={"order-item-details-inc-" <> @item.item.id}>+</button>
+            <button phx-target={@myself} phx-click="inc" phx-value-product_id={@item.item.id}
+                class="p-1 m-2 rounded-full text-white font-bold btn-primary" id={"order-item-details-inc-" <>
+                @item.item.id}>+</button>
         </div>
     </span>
     <div class="flex-1" id={"order-item-details-info-" <> @item.item.id}>
         <span class="font-bold text-lg" id={"order-item-details-price-" <> @item.item.id}><%= @item.item.price %></span>
-        <button phx-target={@myself} phx-click="remove" phx-value-product_id={@item.item.id} class="w-6 h-6 rounded-full text-white font-bold btn-primary">
+        <button phx-target={@myself} id={"order-item-details-remove-" <> @item.item.id} phx-click="remove"
+            phx-value-product_id={@item.item.id} class="w-6 h-6 rounded-full text-white font-bold btn-primary">
             &#10006
         </button>
     </div>
