@@ -54,7 +54,8 @@ defmodule FoodOrder.Carts.Core.UpdateCart do
         if item.item.id == product_id do
           {list, _} = acc
           updated_item = %{item | qty: item.qty - 1}
-          if updated_item.qty == 0  do
+
+          if updated_item.qty == 0 do
             {list, updated_item}
           else
             item_updated = [updated_item]
