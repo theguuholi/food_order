@@ -7,16 +7,20 @@
     <%= if @current_user do %>
     <div>
 
-        <form class="mt-12" action="" id="confirm-order-form">
-            <input class="border border-gray-400 p-2 w-1/2 mb-4" id="" type="text" name="" placeholder="Phone Number">
+        <form class="mt-12" action="" id="confirm-order-form" phx-target={@myself} phx-submit="create_order">
+            <input class="border border-gray-400 p-2 w-1/2 mb-4" id="phone_number" type="text" name="phone_number"
+                placeholder="Phone Number">
 
-            <input class="border border-gray-400 p-2 w-1/2" id="" type="text" name="" placeholder="Address">
+            <input class="border border-gray-400 p-2 w-1/2" id="address" type="text" name="address"
+                placeholder="Address">
 
-            <%# <div>
-                <button class="btn-primary px-6 py-2 rounded-full text-white font-bold mt-6" type="submit">
+            <input type="hidden" name="current_user" id="current_user" value={@current_user.id}>
+
+            <div>
+                <button class="btn-primary px-6 py-2 rounded-full text-white font-bold mt-6">
                     Order Now
                 </button>
-            </div> %>
+            </div>
         </form>
     </div>
     <% else %>
