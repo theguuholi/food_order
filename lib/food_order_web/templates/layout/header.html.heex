@@ -1,13 +1,13 @@
 <nav id="header-menu" class="container mx-auto flex items-center justify-between py-4">
     <div id="logo">
-        <a href="/">
+        <%= link to: Routes.main_path(@conn, :index) do %>
         <img src={Routes.static_path(@conn, "/images/food.svg" )} alt="" class="h-16 w-16">
-        </a>
+        <% end %>
     </div>
     <div id="menu">
         <ul class="flex items-center">
             <li class="ml-6"><a href="#">Offers</a></li>
-            <li class="ml-6"><a href="/">Menu</a></li>
+            <li class="ml-6"><%= link "Menu", to: Routes.main_path(@conn, :index) %></li>
             <%= if @current_user do %>
             <li class="ml-6"><%= @current_user.email %></li>
             <li class="ml-6"><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>

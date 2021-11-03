@@ -17,8 +17,7 @@
     </span>
     <div class="flex-1" id={"order-item-details-info-" <> @item.item.id}>
         <span class="font-bold text-lg" id={"order-item-details-price-" <> @item.item.id}><%= @item.item.price %></span>
-        <button phx-target={@myself} id={"order-item-details-remove-" <> @item.item.id} phx-click="remove"
-            phx-value-product_id={@item.item.id} class="w-6 h-6 rounded-full text-white font-bold btn-primary">
+        <button phx-target={@myself} id={"order-item-details-remove-" <> @item.item.id} phx-click="remove" phx-value-product_id={@item.item.id} class="w-6 h-6 rounded-full text-white font-bold btn-primary">
             &#10006
         </button>
     </div>

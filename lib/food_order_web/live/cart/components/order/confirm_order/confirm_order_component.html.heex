@@ -1,12 +1,14 @@
 <div class="text-right py-4" id="confirm-order">
     <div id="confirm-order-summary">
         <span class="text-lg font-bold">Total Amount:</span>
-        <span class="amount text-2xl font-bold ml-2" id="confirm-order-summary-total-amount"><%= @order.total_price %></span>
+        <span class="amount text-2xl font-bold ml-2"
+            id="confirm-order-summary-total-amount"><%= @order.total_price %></span>
     </div>
+    <%= if @current_user do %>
     <div>
+
         <form class="mt-12" action="" id="confirm-order-form">
-            <input class="border border-gray-400 p-2 w-1/2 mb-4" id="" type="text" name=""
-                placeholder="Phone Number">
+            <input class="border border-gray-400 p-2 w-1/2 mb-4" id="" type="text" name="" placeholder="Phone Number">
 
             <input class="border border-gray-400 p-2 w-1/2" id="" type="text" name="" placeholder="Address">
 
@@ -17,5 +19,7 @@
             </div> %>
         </form>
     </div>
-    <a href="#" class="inline-block cursor-pointer btn-primary px-6 py-2 rounded-full text-white font-bold mt-6">Login to continue</a>
+    <% else %>
+    <%= link "Login to continue", to: Routes.user_session_path(@socket, :new), class: "inline-block cursor-pointer btn-primary px-6 py-2 rounded-full text-white font-bold mt-6" %>
+    <% end %>
 </div>
