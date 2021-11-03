@@ -18,8 +18,8 @@ defmodule FoodOrder.Orders.Data.Order do
   @doc false
   def changeset(order, attrs) do
     order
-    |> cast(attrs, [:total_price, :total_quantity])
-    |> validate_required([:total_price, :total_quantity])
+    |> cast(attrs, [:total_price, :total_quantity, :user_id])
+    |> validate_required([:total_price, :total_quantity, :user_id])
     |> cast_assoc(:items, with: &Item.changeset/2)
   end
 end
