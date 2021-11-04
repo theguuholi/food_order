@@ -27,6 +27,7 @@ defmodule FoodOrderWeb.Router do
       live "/", MainLive, :index
 
       live "/cart", CartLive, :index
+      live "/orders", OrderLive, :index
     end
   end
 

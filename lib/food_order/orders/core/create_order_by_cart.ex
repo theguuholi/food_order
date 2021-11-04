@@ -8,15 +8,6 @@ defmodule FoodOrder.Orders.Core.CreateOrderByCart do
         "current_user" => current_user,
         "phone_number" => _phone_number
       }) do
-    # TODO INCLUDE
-    # payment_type required
-    # status required
-    # phone required
-    # address required
-    # field are not filled?
-    # throw All fields are quired
-    # throw success or error message
-    # throw to customer/orders and user can see their orders
     current_user
     |> Carts.get_cart()
     |> convert_item_session_to_payload_item()
