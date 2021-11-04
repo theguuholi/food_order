@@ -10,14 +10,6 @@ defmodule FoodOrderWeb.Cart.Components.Order.ConfirmOrder.ConfirmOrderComponent 
     # IO.inspect params
     cart = Carts.get_cart(params["current_user"])
     IO.inspect cart
-    # Order
-    # - belongs user, required
-    # - has many items, required
-    #   - item:
-    #     product_id
-    #     quantity
-    # - total_price required
-    # - total_quantity: required
     # TODO INCLUDE
     # payment_type required
     # status required
