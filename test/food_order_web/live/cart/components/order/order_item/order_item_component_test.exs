@@ -21,24 +21,23 @@ defmodule FoodOrderWeb.Cart.Components.Order.OrderItem.OrderItemComponentTest do
 
       assert html =~ "Item added to cart"
 
-        view
-        |> follow_redirect(Routes.cart_path(conn, :index))
-        |> IO.inspect
+
+      {:ok, view, html} = live(conn, Routes.cart_path(conn, :index))
 
       assert html =~ "Order Summary"
 
-      # assert has_element?(view, "#order-item-#{product.id}")
-      # assert has_element?(view, "#order-item-details-#{product.id}")
+      assert has_element?(view, "#order-item-#{product.id}")
+      assert has_element?(view, "#order-item-details-#{product.id}")
 
-      # assert is_there_id_with_text?(view, "#order-item-details-name-#{product.id}", product.name)
-      # assert is_there_id_with_text?(view, "#order-item-details-size-#{product.id}", product.size)
-      # assert is_there_id_with_text?(view, "#order-item-details-amount-#{product.id}", "1 Item(s)")
+      assert is_there_id_with_text?(view, "#order-item-details-name-#{product.id}", product.name)
+      assert is_there_id_with_text?(view, "#order-item-details-size-#{product.id}", product.size)
+      assert is_there_id_with_text?(view, "#order-item-details-amount-#{product.id}", "1 Item(s)")
 
-      # assert is_there_id_with_text?(
-      #          view,
-      #          "#order-item-details-price-#{product.id}",
-      #          Money.to_string(product.price)
-      #        )
+      assert is_there_id_with_text?(
+               view,
+               "#order-item-details-price-#{product.id}",
+               Money.to_string(product.price)
+             )
     end
 
     test "should dec element ", %{conn: conn} do
