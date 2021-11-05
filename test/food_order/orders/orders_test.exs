@@ -14,12 +14,6 @@ defmodule FoodOrder.OrdersTest do
       assert :ok == Carts.update_cart(product, user.id)
       assert 1 == Carts.get_cart(user.id).total_qty
 
-      payload = %{
-        "address" => "123",
-        "current_user" => user.id,
-        "phone_number" => "123"
-      }
-
       {:ok, result} = Orders.create_order_by_cart(user.id)
       assert 1 == result.total_quantity
       assert 0 == Carts.get_cart(user.id).total_qty
