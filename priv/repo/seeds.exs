@@ -27,4 +27,3 @@ Order.changeset(%Order{}, %{
   total_price: total_price
 })
 |> Repo.insert!()
-|> IO.inspect()
