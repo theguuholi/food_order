@@ -15,6 +15,15 @@ defmodule FoodOrder.CartsTest do
     assert 1 == Carts.get_cart(4444).total_qty
   end
 
+  test "should delete cart" do
+    session_id = :rand.uniform(1000)
+
+    assert :ok == Carts.create_session(session_id)
+    product = insert(:product, %{})
+    assert :ok == Carts.update_cart(product, session_id)
+    assert :ok == Carts.delete_cart(session_id)
+  end
+
   test "should add product and get" do
     session_id = :rand.uniform(1000)
 

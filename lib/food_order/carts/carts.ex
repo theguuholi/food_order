@@ -7,4 +7,5 @@ defmodule FoodOrder.Carts do
   def remove(product_id, cart_id), do: CartSessionApi.remove(cart_id, product_id)
   def update_cart(product, cart_id), do: CartSessionApi.update(cart_id, product)
   def get_cart(cart_id), do: CartSessionApi.get(cart_id)
+  def delete_cart(cart_id), do: CartSessionApi.delete_cart(cart_id)
 end

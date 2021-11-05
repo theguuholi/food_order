@@ -10,6 +10,11 @@ defmodule FoodOrder.Carts.Boundaries.CartSession do
     {:ok, name}
   end
 
+  def handle_cast({:delete_cart, cart_id}, name) do
+    :ets.insert(name, {cart_id, NewCart.new()})
+    {:noreply, name}
+  end
+
   def handle_cast({:insert, cart_id}, name) do
     case get_list(name, cart_id) do
       {:not_found, []} -> :ets.insert(name, {cart_id, NewCart.new()})

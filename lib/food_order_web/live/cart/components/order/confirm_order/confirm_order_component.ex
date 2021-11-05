@@ -26,7 +26,7 @@ defmodule FoodOrderWeb.Cart.Components.Order.ConfirmOrder.ConfirmOrderComponent 
         socket =
           socket
           |> put_flash(:error, "Something went wrong please verify your order")
-          |> push_patch(to: Routes.cart_path(socket, :index))
+          |> push_redirect(to: Routes.cart_path(socket, :index))
 
         {:noreply, socket}
     end

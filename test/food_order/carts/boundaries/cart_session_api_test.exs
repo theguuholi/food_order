@@ -19,6 +19,15 @@ defmodule FoodOrder.Carts.Boundaries.CartSessionApiTest do
     assert 1 == CartSessionApi.get(333).total_qty
   end
 
+  test "should delete cart" do
+    session_id = :rand.uniform(1000)
+
+    assert :ok == CartSessionApi.insert(session_id)
+    product = insert(:product, %{})
+    assert :ok == CartSessionApi.update(session_id, product)
+    assert :ok == CartSessionApi.delete_cart(session_id)
+  end
+
   test "should dec product and get" do
     session_id = :rand.uniform(1000)
 

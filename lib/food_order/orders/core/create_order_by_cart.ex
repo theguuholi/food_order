@@ -13,7 +13,14 @@ defmodule FoodOrder.Orders.Core.CreateOrderByCart do
     |> convert_item_session_to_payload_item()
     |> create_order_payload(current_user)
     |> Repo.insert()
+    |> remove_cache()
   end
+
+  def remove_cache({:ok, order}) do
+    Carts.delete_cart(order.user_id)
+    {:ok, order}
+  end
+  def remove_cache({:error, _} = err), do: err
 
   defp convert_item_session_to_payload_item(%{items: items} = cart) do
     payload_items =
