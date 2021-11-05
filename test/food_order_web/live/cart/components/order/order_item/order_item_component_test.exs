@@ -4,8 +4,6 @@ defmodule FoodOrderWeb.Cart.Components.Order.OrderItem.OrderItemComponentTest do
   import FoodOrder.Factory
   import Phoenix.LiveViewTest
 
-  alias FoodOrder.Carts
-
   describe "should validate cart" do
     setup :register_and_log_in_user
 
@@ -13,14 +11,13 @@ defmodule FoodOrderWeb.Cart.Components.Order.OrderItem.OrderItemComponentTest do
       product = insert(:product)
       {:ok, view, _html} = live(conn, "/")
 
-      {:ok, view, html} =
+      {:ok, _view, html} =
         view
         |> element("#food-item-add-#{product.id}", "add")
         |> render_click()
         |> follow_redirect(conn, Routes.main_path(conn, :index))
 
       assert html =~ "Item added to cart"
-
 
       {:ok, view, html} = live(conn, Routes.cart_path(conn, :index))
 
@@ -42,9 +39,17 @@ defmodule FoodOrderWeb.Cart.Components.Order.OrderItem.OrderItemComponentTest do
 
     test "should dec element ", %{conn: conn} do
       product = insert(:product)
-      Carts.create_session("user123")
-      Carts.update_cart(product, "user123")
-      {:ok, view, _html} = live(conn, "/cart")
+      {:ok, view, _html} = live(conn, "/")
+
+      {:ok, _view, html} =
+        view
+        |> element("#food-item-add-#{product.id}", "add")
+        |> render_click()
+        |> follow_redirect(conn, Routes.main_path(conn, :index))
+
+      assert html =~ "Item added to cart"
+
+      {:ok, view, _html} = live(conn, Routes.cart_path(conn, :index))
 
       assert has_element?(view, "#order-item-#{product.id}")
       assert has_element?(view, "#order-item-details-#{product.id}")
@@ -68,9 +73,17 @@ defmodule FoodOrderWeb.Cart.Components.Order.OrderItem.OrderItemComponentTest do
 
     test "should inc element ", %{conn: conn} do
       product = insert(:product)
-      Carts.create_session("user123")
-      Carts.update_cart(product, "user123")
-      {:ok, view, _html} = live(conn, "/cart")
+      {:ok, view, _html} = live(conn, "/")
+
+      {:ok, _view, html} =
+        view
+        |> element("#food-item-add-#{product.id}", "add")
+        |> render_click()
+        |> follow_redirect(conn, Routes.main_path(conn, :index))
+
+      assert html =~ "Item added to cart"
+
+      {:ok, view, _html} = live(conn, Routes.cart_path(conn, :index))
 
       assert has_element?(view, "#order-item-#{product.id}")
       assert has_element?(view, "#order-item-details-#{product.id}")
@@ -84,9 +97,17 @@ defmodule FoodOrderWeb.Cart.Components.Order.OrderItem.OrderItemComponentTest do
 
     test "should remove element ", %{conn: conn} do
       product = insert(:product)
-      Carts.create_session("user123")
-      Carts.update_cart(product, "user123")
-      {:ok, view, _html} = live(conn, "/cart")
+      {:ok, view, _html} = live(conn, "/")
+
+      {:ok, _view, html} =
+        view
+        |> element("#food-item-add-#{product.id}", "add")
+        |> render_click()
+        |> follow_redirect(conn, Routes.main_path(conn, :index))
+
+      assert html =~ "Item added to cart"
+
+      {:ok, view, _html} = live(conn, Routes.cart_path(conn, :index))
 
       assert has_element?(view, "#order-item-#{product.id}")
       assert has_element?(view, "#order-item-details-#{product.id}")
