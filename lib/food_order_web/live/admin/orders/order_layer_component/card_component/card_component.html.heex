@@ -1,0 +1,47 @@
+<li class="block p-5 mb-5 bg-white rounded-md shadow">
+    <a href="#">
+        <div class="flex justify-between mb-2">
+            <p class="text-sm font-medium leading-snug text-gray-900">Order #123</p>
+            <span>
+                <img class="rounded-full h-6 w-6" src={Routes.static_path(@socket, "/images/delivery-icon.svg" )}
+                    alt="">
+            </span>
+        </div>
+
+        <hr>
+
+        <div>
+            <p class="text-sm  p-2 font-medium leading-snug text-gray-900">Order Items</p>
+            <ul>
+                <li class="text-sm mb-1 flex justify-between">
+                    <span>3 - Item 123</span>
+                    <span>$ 10</span>
+                </li>
+                <li class="text-sm mb-1 flex justify-between">
+                    <span>2 - Item 123</span>
+                    <span>$ 10</span>
+                </li>
+            </ul>
+        </div>
+
+        <hr>
+        <div>
+            <p class="text-sm p-2 font-medium leading-snug text-gray-900">Order Description</p>
+            <ul class=" text-xs">
+                <li class="flex justify-between  mb-1">
+                    <span>Total Cost:</span>
+                    <span class="font-bold">$ 50</span>
+                </li>
+                <li class="flex justify-between mb-1">
+                    <span>Total Item:</span>
+                    <span class="font-bold">4</span>
+                </li>
+                <li class="flex justify-between mb-1">
+                    <span>Customer: </span>
+                    <span class="font-bold">Gustavo</span>
+                </li>
+            </ul>
+        </div>
+    </a>
+
+</li>
