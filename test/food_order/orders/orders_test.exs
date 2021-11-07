@@ -17,7 +17,7 @@ defmodule FoodOrder.OrdersTest do
       payload = %{
         "address" => nil,
         "current_user" => user.id,
-        "phone_number" =>  nil
+        "phone_number" => nil
       }
 
       {:ok, result} = Orders.create_order_by_cart(payload)

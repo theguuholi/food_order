@@ -83,7 +83,7 @@ defmodule FoodOrderWeb.Cart.Components.Order.ConfirmOrder.ConfirmOrderComponentT
         |> render_submit()
         |> follow_redirect(conn, Routes.cart_path(conn, :index))
 
-      assert html =~  "Something went wrong please verify your order"
+      assert html =~ "Something went wrong please verify your order"
     end
   end
 end

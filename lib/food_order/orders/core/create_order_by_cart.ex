@@ -20,6 +20,7 @@ defmodule FoodOrder.Orders.Core.CreateOrderByCart do
     Carts.delete_cart(order.user_id)
     {:ok, order}
   end
+
   def remove_cache({:error, _} = err), do: err
 
   defp convert_item_session_to_payload_item(%{items: items} = cart) do

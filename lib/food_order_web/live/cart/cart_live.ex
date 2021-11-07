@@ -8,10 +8,12 @@ defmodule FoodOrderWeb.CartLive do
     current_user = socket.assigns.current_user
     cart_id = socket.assigns.cart_id
     order = Carts.get_cart(cart_id)
-    {:ok, socket |> assign(order: order)
-    |> assign(cart_id: cart_id)
-    |> assign(current_user: current_user)
-  }
+
+    {:ok,
+     socket
+     |> assign(order: order)
+     |> assign(cart_id: cart_id)
+     |> assign(current_user: current_user)}
   end
 
   def empty_cart, do: EmptyCartComponent

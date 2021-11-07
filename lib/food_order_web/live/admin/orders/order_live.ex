@@ -4,7 +4,7 @@ defmodule FoodOrderWeb.Admin.OrderLive do
 
   @impl true
   def mount(_assign, _session, socket) do
-    {:ok,socket}
+    {:ok, socket}
   end
 
   defp side_menu, do: SideMenuComponent
