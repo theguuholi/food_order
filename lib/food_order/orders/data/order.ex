@@ -4,6 +4,8 @@ defmodule FoodOrder.Orders.Data.Order do
   alias FoodOrder.Accounts.User
   alias FoodOrder.Orders.Data.Item
 
+  @status_values ~w(NOT_STARTED RECEIVED PREPARING DELIVERING DELIVERED)a
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "orders" do
@@ -11,6 +13,7 @@ defmodule FoodOrder.Orders.Data.Order do
     field :total_quantity, :integer
     belongs_to :user, User
     has_many :items, Item
+    field :status, Ecto.Enum, values: @status_values, default: :NOT_STARTED
 
     timestamps()
   end

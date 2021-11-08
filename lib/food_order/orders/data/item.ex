@@ -1,12 +1,13 @@
 defmodule FoodOrder.Orders.Data.Item do
   use Ecto.Schema
   import Ecto.Changeset
+  alias FoodOrder.Products.Product
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "items" do
     field :quantity, :integer
-    field :product_id, :binary_id
+    belongs_to :product, Product
     field :order_id, :binary_id
 
     timestamps()
