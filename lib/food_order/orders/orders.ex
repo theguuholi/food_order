@@ -1,4 +1,5 @@
 defmodule FoodOrder.Orders do
+  alias FoodOrder.Orders.Core.AllStatusOrders
   alias FoodOrder.Orders.Core.CreateOrderByCart
   alias FoodOrder.Orders.Core.ListOrdersByStatus
   alias FoodOrder.Orders.Core.ListOrdersByUserId
@@ -13,5 +14,9 @@ defmodule FoodOrder.Orders do
 
   def list_orders_by_status(status) do
     ListOrdersByStatus.execute(status)
+  end
+
+  def all_status_orders() do
+    AllStatusOrders.execute
   end
 end

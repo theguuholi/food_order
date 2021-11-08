@@ -5,6 +5,10 @@
         <div class="flex-1 overflow-auto">
             <main class="p-3 flex">
                 <%= live_component order_layer(), id: "NOT_STARTED" %>
+                <%= live_component order_layer(), id: "RECEIVED" %>
+                <%= live_component order_layer(), id: "PREPARING" %>
+                <%= live_component order_layer(), id: "DELIVERING" %>
+                <%= live_component order_layer(), id: "DELIVERED" %>
             </main>
         </div>
     </div>
