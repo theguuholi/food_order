@@ -36,7 +36,14 @@ defmodule FoodOrder.OrdersTest do
     end
 
     test "count orders" do
-      assert %AllStatusOrders{all: 0, delivered: 0, delivering: 0, not_started: 0, preparing: 0, received: 0} == Orders.all_status_orders()
+      assert %AllStatusOrders{
+               all: 0,
+               delivered: 0,
+               delivering: 0,
+               not_started: 0,
+               preparing: 0,
+               received: 0
+             } == Orders.all_status_orders()
     end
   end
 end
