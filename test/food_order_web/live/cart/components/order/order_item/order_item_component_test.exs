@@ -28,7 +28,12 @@ defmodule FoodOrderWeb.Cart.Components.Order.OrderItem.OrderItemComponentTest do
 
       assert is_there_id_with_text?(view, "#order-item-details-name-#{product.id}", product.name)
       assert is_there_id_with_text?(view, "#order-item-details-size-#{product.id}", product.size)
-      assert is_there_id_with_text?(view, "#order-item-details-amount-#{product.id}", "1 Item(s)")
+
+      assert is_there_id_with_text?(
+               view,
+               "[data-role=order-item-details-amount-#{product.id}]",
+               "1 Item(s)"
+             )
 
       assert is_there_id_with_text?(
                view,

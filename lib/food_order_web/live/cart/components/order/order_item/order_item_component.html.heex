@@ -9,7 +9,7 @@
             <button phx-target={@myself} phx-click="dec" phx-value-product_id={@item.item.id}
                 class="p-1 m-2 rounded-full text-white font-bold btn-primary" id={"order-item-details-dec-" <>
                 @item.item.id}>-</button>
-            <div id={"order-item-details-amount-" <> @item.item.id}> <%= @item.qty %> Item(s) </div>
+            <div data-test-id={"order-item-details-amount-" <> @item.item.id}> <%= @item.qty %> Item(s) </div>
             <button phx-target={@myself} phx-click="inc" phx-value-product_id={@item.item.id}
                 class="p-1 m-2 rounded-full text-white font-bold btn-primary" id={"order-item-details-inc-" <>
                 @item.item.id}>+</button>
