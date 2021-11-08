@@ -2,7 +2,9 @@ defmodule FoodOrder.Repo.Migrations.CreateOrders do
   use Ecto.Migration
 
   def change do
-    create_query = "CREATE TYPE status AS ENUM ('NOT_STARTED', 'RECEIVED', 'PREPARING', 'DELIVERING', 'DELIVERED')"
+    create_query =
+      "CREATE TYPE status AS ENUM ('NOT_STARTED', 'RECEIVED', 'PREPARING', 'DELIVERING', 'DELIVERED')"
+
     drop_query = "DROP TYPE status"
 
     execute(create_query, drop_query)

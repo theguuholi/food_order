@@ -16,7 +16,7 @@ defmodule FoodOrder.Orders do
     ListOrdersByStatus.execute(status)
   end
 
-  def all_status_orders() do
-    AllStatusOrders.execute
+  def all_status_orders do
+    AllStatusOrders.execute()
   end
 end

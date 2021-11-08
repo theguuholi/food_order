@@ -1,10 +1,9 @@
 defmodule FoodOrderWeb.Admin.Orders.OrderLayerComponent do
   use FoodOrderWeb, :live_component
-  alias FoodOrderWeb.Orders.OrderLayer.CardComponent
   alias FoodOrder.Orders
+  alias FoodOrderWeb.Orders.OrderLayer.CardComponent
 
   def update(%{id: id} = assigns, socket) do
-
     {:ok,
      socket
      |> assign(assigns)
@@ -17,5 +16,4 @@ defmodule FoodOrderWeb.Admin.Orders.OrderLayerComponent do
     orders = Orders.list_orders_by_status(id)
     assign(socket, orders: orders)
   end
-
 end

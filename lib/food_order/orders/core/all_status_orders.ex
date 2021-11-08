@@ -4,13 +4,15 @@ defmodule FoodOrder.Orders.Core.AllStatusOrders do
   alias FoodOrder.Orders.Data.Order
   alias FoodOrder.Repo
   import Ecto.Query
-  # @status_values ~w( RECEIVED PREPARING DELIVERING DELIVERED)a
 
-  def execute() do
+  def execute do
     %__MODULE__{}
     |> count_all
     |> not_started_status
-    |> IO.inspect()
+    |> received_status
+    |> preparing_status
+    |> delivering_status
+    |> delivered_status
   end
 
   defp count_all(module) do
@@ -22,8 +24,24 @@ defmodule FoodOrder.Orders.Core.AllStatusOrders do
     %__MODULE__{module | all: result}
   end
 
+  defp delivered_status(module) do
+    %__MODULE__{module | delivered: filter_status(:DELIVERED)}
+  end
+
   defp not_started_status(module) do
     %__MODULE__{module | not_started: filter_status(:NOT_STARTED)}
+  end
+
+  defp delivering_status(module) do
+    %__MODULE__{module | delivering: filter_status(:DELIVERING)}
+  end
+
+  defp received_status(module) do
+    %__MODULE__{module | received: filter_status(:RECEIVED)}
+  end
+
+  defp preparing_status(module) do
+    %__MODULE__{module | preparing: filter_status(:PREPARING)}
   end
 
   defp filter_status(status) do
