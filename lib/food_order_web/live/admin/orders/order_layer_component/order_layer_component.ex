@@ -3,7 +3,9 @@ defmodule FoodOrderWeb.Admin.Orders.OrderLayerComponent do
   alias FoodOrder.Orders
   alias FoodOrderWeb.Orders.OrderLayer.CardComponent
 
+  @impl true
   def update(%{id: id} = assigns, socket) do
+    IO.inspect id
     {:ok,
      socket
      |> assign(assigns)
@@ -18,12 +20,14 @@ defmodule FoodOrderWeb.Admin.Orders.OrderLayerComponent do
   end
 
   @impl true
-
-  def handle_event("dropped", params, socket) do
-    IO.inspect "dropped"
-    IO.inspect params
-    # implementation will go here
+  def handle_event(
+        "dropped",
+        %{"orderId" => order_id,
+          "orderStatus" => next_status,
+          "orderOldStatus" => old_status},
+        socket
+      ) do
+    Orders.update_order_status(order_id, old_status, next_status)
     {:noreply, socket}
   end
-
 end

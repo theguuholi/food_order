@@ -1,2 +1,2 @@
 # Todos
-- images, infinitescroling, tests
+ infinitescroling

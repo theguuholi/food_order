@@ -17,11 +17,10 @@ export default {
                 draggable: '.draggable',
                 ghostClass: 'sortable-ghost',
                 onEnd: function (evt) {
-                    console.log("EVT")
-                    console.log(evt)
                     hook.pushEventTo(selector, 'dropped', {
-                        draggedId: evt.item.id,
-                        dropzoneId: evt.to.id,
+                        orderId: evt.item.id,
+                        orderStatus: evt.to.id,
+                        orderOldStatus: evt.from.id,
                         draggableIndex: evt.newDraggableIndex
                     })
                 }
