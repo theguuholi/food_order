@@ -5,7 +5,7 @@ defmodule FoodOrderWeb.Admin.OrderLayerComponentTest do
 
   test "load board", %{conn: conn} do
     {:ok, view, _html} = live(conn, "/admin/orders")
-    assert has_element?(view, "#order-board-123")
-    assert has_element?(view, "#order-layer-title-1", "Backlog")
+    assert has_element?(view, "[data-role=order-board][data-id=NOT_STARTED]")
+    assert has_element?(view, "[data-role=order-layer-title][data-id=NOT_STARTED]", "Not started")
   end
 end

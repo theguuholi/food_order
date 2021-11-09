@@ -24,6 +24,13 @@ defmodule FoodOrder.Orders.Core.AllStatusOrders do
     %__MODULE__{module | all: result}
   end
 
+  defp filter_status(status) do
+    Order
+    |> where([o], o.status == ^status)
+    |> select([o], count(o.id))
+    |> Repo.one()
+  end
+
   defp delivered_status(module) do
     %__MODULE__{module | delivered: filter_status(:DELIVERED)}
   end
@@ -42,12 +49,5 @@ defmodule FoodOrder.Orders.Core.AllStatusOrders do
 
   defp preparing_status(module) do
     %__MODULE__{module | preparing: filter_status(:PREPARING)}
-  end
-
-  defp filter_status(status) do
-    Order
-    |> where([o], o.status == ^status)
-    |> select([o], count(o.id))
-    |> Repo.one()
   end
 end
