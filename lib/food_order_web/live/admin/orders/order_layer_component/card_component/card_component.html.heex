@@ -1,54 +1,64 @@
-<li class="block p-5 mb-5 bg-white rounded-md shadow" id={"card-" <> @board <> "-" <> @card.id}>
-            <a href="#">
-                <div class="flex justify-between mb-2">
-                    <p class="text-sm font-medium leading-snug text-gray-900" id={"card-" <> @board <> "-" <> @card.id
-                                <> "-order"}><%= @card.id %></p>
-                    <span>
-                        <img class="rounded-full h-6 w-6" src={Routes.static_path(@socket, "/images/delivery-icon.svg"
-                            )} alt="">
-                    </span>
-                </div>
+<li class="block p-5 mb-5 bg-white rounded-md shadow" data-role="card-board" data-id={@board <> "-" <> @card.id}>
+        <a href="#">
+            <div class="flex justify-between mb-2">
+                <p class="text-sm font-medium leading-snug text-gray-900" data-role="order-number" data-id={@board <>
+                    "-" <> @card.id}>
+                        <%= @card.id %>
+                </p>
+                <span>
+                    <img class="rounded-full h-6 w-6" src={Routes.static_path(@socket, "/images/delivery-icon.svg" )}
+                        alt="">
+                </span>
+            </div>
 
-                <hr>
+            <hr>
 
-                <div>
-                    <p class="text-sm  p-2 font-medium leading-snug text-gray-900" id={"card-" <> @board <> "-" <>
-                                @card.id <> "-order-items-title"}>Order Items</p>
-                    <ul id={"card-" <> @board <> "-" <> @card.id <> "-order-items"}>
-                                    <%= for item <- @card.items do %>
-                                    <li class="text-sm mb-1 flex justify-between" id={"card-" <> @board <> "-" <>
-                                                @card.id <> "-order-item-1"}>
-                                                    <span id={"card-" <> @board <> "-" <> @card.id <>
-                                                                    "-order-item-1-name"}><%= item.quantity %> -
-                                                                    <%= item.product.name %></span>
-                                                    <span id={"card-" <> @board <> "-" <> @card.id <>
-                                                                    "-order-item-1-price"}><%= item.product.price %></span>
-                                    </li>
-                                    <% end %>
-                    </ul>
-                </div>
+            <div>
+                <p class="text-sm  p-2 font-medium leading-snug text-gray-900" data-role="order-items"
+                    data-id={@board}}>
+                    Order Items
+                </p>
+                <ul data-role="items-list" data-id={@board}>
+                    <%= for item <- @card.items do %>
+                    <li class="text-sm mb-1 flex justify-between" data-role="item" data-id={@board <> "-" <> @card.id <>
+                                "-" <> item.id}>
+                                    <span data-role="item-details" data-id={@board <> "-" <> @card.id <> "-" <>
+                                                    item.id}>
+                                                    <%= item.quantity %> - <%= item.product.name %>
+                                    </span>
+                                    <span data-role="item-price" data-id={@board <> "-" <> @card.id <> "-" <> item.id}>
+                                                    <%= item.product.price %>
+                                    </span>
+                    </li>
+                    <% end %>
+                </ul>
+            </div>
 
-                <hr>
-                <div>
-                    <p class="text-sm p-2 font-medium leading-snug text-gray-900" id={"card-" <> @board <> "-" <>
-                                @card.id <> "-order-description"}>Order Description</p>
-                    <ul class=" text-xs">
-                        <li class="flex justify-between  mb-1">
-                            <span id={"card-" <> @board <> "-" <> @card.id <> "-order-total-cost"}>Total Cost:</span>
-                            <span class="font-bold" id={"card-" <> @board <> "-" <> @card.id <>
-                                            "-order-total-amount"}><%= @card.total_price %></span>
-                        </li>
-                        <li class="flex justify-between mb-1">
-                            <span id={"card-" <> @board <> "-" <> @card.id <> "-order-total-item"}>Total Item:</span>
-                            <span class="font-bold" id={"card-" <> @board <> "-" <> @card.id <>
-                                            "-order-total-item-amount"}><%= @card.total_quantity %></span>
-                        </li>
-                        <li class="flex justify-between mb-1">
-                            <span>Customer: </span>
-                            <span class="font-bold" id={"card-" <> @board <> "-" <> @card.id <>
-                                            "-order-customer-name"}><%= @card.user.email %></span>
-                        </li>
-                    </ul>
-                </div>
-            </a>
+            <hr>
+            <div>
+                <p class="text-sm p-2 font-medium leading-snug text-gray-900" data-role="order-description-title">
+                    Order Description
+                </p>
+                <ul class=" text-xs">
+                    <li class="flex justify-between  mb-1">
+                        <span data-role="total-cost">Total Cost:</span>
+                        <span class="font-bold" data-role="total-cost-amount" data-id={@board <> "-" <> @card.id}>
+                                <%= @card.total_price %>
+                        </span>
+                    </li>
+                    <li class="flex justify-between mb-1">
+                        <span data-role="total-items">Total Item:</span>
+                        <span class="font-bold" data-role="total-items-amount" data-id={@board <> "-" <> @card.id}>
+                                <%= @card.total_quantity %>
+                        </span>
+                    </li>
+                    <li class="flex justify-between mb-1">
+                        <span>Customer: </span>
+                        <span class="font-bold" data-role="customer" data-id={@board <> "-" <> @card.id}>
+                                <%= @card.user.email %>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </a>
 </li>
