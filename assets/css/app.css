@@ -196,3 +196,8 @@ section.login a:hover{
 a.link{
   color: var(--primary);
 }
+
+.sortable-ghost {
+  opacity: 0.75;
+}
+/* https://www.headway.io/blog/client-side-drag-and-drop-with-phoenix-liveview */

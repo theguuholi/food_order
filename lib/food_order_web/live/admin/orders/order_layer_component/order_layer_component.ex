@@ -16,4 +16,14 @@ defmodule FoodOrderWeb.Admin.Orders.OrderLayerComponent do
     orders = Orders.list_orders_by_status(id)
     assign(socket, orders: orders)
   end
+
+  @impl true
+
+  def handle_event("dropped", params, socket) do
+    IO.inspect "dropped"
+    IO.inspect params
+    # implementation will go here
+    {:noreply, socket}
+  end
+
 end
