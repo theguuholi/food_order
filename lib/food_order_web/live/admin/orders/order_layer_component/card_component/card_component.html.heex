@@ -1,4 +1,5 @@
-<li class="draggable block p-5 mb-5 bg-white rounded-md shadow" id={@id} draggable="true" data-role="card-board" data-id={@board <> "-" <> @card.id}>
+<li class="draggable block p-5 mb-5 bg-white rounded-md shadow" id={@id} draggable="true" data-role="card-board"
+    data-id={@board <> "-" <> @card.id}>
         <a href="#">
             <div class="flex justify-between mb-2">
                 <p class="text-sm font-medium leading-snug text-gray-900" data-role="order-number" data-id={@board <>
@@ -58,6 +59,14 @@
                                 <%= @card.user.email %>
                         </span>
                     </li>
+                    <%= if @card.status == :DELIVERED do %>
+                    <a class="flex justify-between mb-1 link">
+                        <span class="primary">Delivered at: </span>
+                        <span class="font-bold" data-role="delivered" data-id={@board <> "-" <> @card.id}>
+                                <%= @card.updated_at %>
+                        </span>
+                    </a>
+                    <% end %>
                 </ul>
             </div>
         </a>

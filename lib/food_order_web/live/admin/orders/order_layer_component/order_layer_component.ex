@@ -5,7 +5,6 @@ defmodule FoodOrderWeb.Admin.Orders.OrderLayerComponent do
 
   @impl true
   def update(%{id: id} = assigns, socket) do
-    IO.inspect id
     {:ok,
      socket
      |> assign(assigns)
