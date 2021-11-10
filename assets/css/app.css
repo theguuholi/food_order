@@ -1,7 +1,7 @@
 /* This file is for your main application CSS */
 /* @import "./phoenix.css"; */
 
-:root{
+:root {
   --primary: #fe5f1e;
   --primary-hover: #b23301;
   --secondary: #f8f8f8;
@@ -11,80 +11,80 @@
   --smooth: all .3s ease-in-out;
 }
 
-body{
+body {
   font-family: 'Roboto', sans-serif;
   --webkit-font-smoothing: antialiased;
   color: var(--dark);
 }
 
 
-nav#header-menu li:last-child a{
+nav#header-menu li:last-child a {
   background-color: var(--primary);
   color: white
 }
 
-nav#header-menu li:last-child a:hover{
+nav#header-menu li:last-child a:hover {
   background-color: var(--primary-hover);
   color: white
 }
 
-nav li a{
+nav li a {
   transition: var(--smooth);
 }
 
-nav li a:hover{
+nav li a:hover {
   color: var(--primary);
 }
 
-section.hero{
+section.hero {
   background: var(--secondary);
 }
 
-.size{
+.size {
   background: var(--secondary);
 }
 
-.add-to-cart{
+.add-to-cart {
   border: 2px solid var(--primary);
   color: var(--primary);
   transition: var(--smooth);
 
 }
 
-.add-to-cart:hover{
+.add-to-cart:hover {
   background: var(--primary);
   border-color: var(--pure);
   color: var(--pure);
 }
 
-.btn-primary{
- background: var(--primary); 
- transition: var(--smooth);
+.btn-primary {
+  background: var(--primary);
+  transition: var(--smooth);
 }
 
-.btn-primary:hover{
-  background-color: var(--primary-hover); 
+.btn-primary:hover {
+  background-color: var(--primary-hover);
 }
 
-section.cart{
+section.cart {
   background: var(--secondary);
 }
 
-section.cart .amount{
+section.cart .amount {
   color: var(--primary);
 }
 
-section.login{
+section.login {
   background: var(--secondary);
   min-height: calc(100vh - 86px);
 }
 
-section.login a{
+section.login a {
   color: var(--primary);
   transition: var(--smooth);
 }
 
-section.login a:hover{
+section.login a:hover {
   color: var(--primary-hover);
 }
 
@@ -108,8 +108,13 @@ section.login a:hover{
 }
 
 @keyframes hide {
-  from { opacity: 1 }
-  to   { opacity: 0 }
+  from {
+    opacity: 1
+  }
+
+  to {
+    opacity: 0
+  }
 }
 
 /* Alerts and form errors used by phx.new */
@@ -118,22 +123,27 @@ section.login a:hover{
   background-color: #d9edf7;
   border-color: #bce8f1;
 }
+
 .alert-warning {
   color: #8a6d3b;
   background-color: #fcf8e3;
   border-color: #faebcc;
 }
+
 .alert-danger {
   color: #a94442;
   background-color: #f2dede;
   border-color: #ebccd1;
 }
+
 .alert p {
   margin-bottom: 0;
 }
+
 .alert:empty {
   display: none;
 }
+
 .invalid-feedback {
   color: #a94442;
   display: block;
@@ -151,15 +161,16 @@ section.login a:hover{
   transition: opacity 1s ease-out;
 }
 
-.phx-disconnected{
+.phx-disconnected {
   cursor: wait;
 }
-.phx-disconnected *{
+
+.phx-disconnected * {
   pointer-events: none;
 }
 
 .phx-modal {
-  opacity: 1!important;
+  opacity: 1 !important;
   position: fixed;
   z-index: 1;
   left: 0;
@@ -167,8 +178,8 @@ section.login a:hover{
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .phx-modal-content {
@@ -193,11 +204,113 @@ section.login a:hover{
   cursor: pointer;
 }
 
-a.link{
+a.link {
   color: var(--primary);
 }
 
 .sortable-ghost {
   opacity: 0.75;
 }
-/* https://www.headway.io/blog/client-side-drag-and-drop-with-phoenix-liveview */
+
+section.status {
+  background: var(--secondary);
+  min-height: calc(100vh - 86px);
+}
+
+.status-box {
+  padding: 60px 0 0;
+}
+
+.status-box ul {
+  margin-left: 84px;
+
+}
+
+.status-box ul li span {
+  position: relative;
+  padding-left: 20px;
+}
+
+.status-box ul li span:after {
+  content: '';
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  background: var(--dark);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  transform: translateY(-5px);
+  box-shadow: 0 0 1px 10px var(--secondary);
+}
+
+.status-box ul li span:before {
+  font-family: "Line Awesome Free";
+  font-size: 46px;
+  font-weight: 600;
+  position: absolute;
+  left: -90px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: inherit;
+}
+
+.status-box ul li:nth-child(1) span:before {
+  content: '\f46c';
+}
+
+.status-box ul li:nth-child(2) span:before {
+  content: '\f560';
+}
+
+.status-box ul li:nth-child(3) span:before {
+  content: '\f818';
+}
+
+.status-box ul li:nth-child(4) span:before {
+  content: '\f0d1';
+}
+
+.status-box ul li:nth-child(5) span:before {
+  content: '\f582';
+}
+
+
+.status-box ul li {
+  position: relative;
+}
+
+.status-box ul li:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -6px;
+  width: 2px;
+  height: 100%;
+  background: var(--dark);
+  margin-top: 10px;
+}
+
+.status-box ul li:nth-child(5) span:after {
+  box-shadow: 0 20px 1px 20px var(--secondary);
+}
+
+.status-box ul li.step-completed:before {
+  background: var(--gray);
+}
+
+.status-box ul li.step-completed span:after {
+  background: var(--gray);
+}
+
+.status-box ul li.step-completed span {
+  color: var(--gray);
+}
+
+.status-box ul li.current span{
+  color: var(--primary);
+}
+
+.status-box ul li.current span:after {
+  background: var(--primary);
+}

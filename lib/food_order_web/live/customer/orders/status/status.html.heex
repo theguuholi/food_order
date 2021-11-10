@@ -1,0 +1,21 @@
+<section class="status">
+    <div class="container mx-auto">
+        <div class="status-box w-2/3 mx-auto">
+            <%= live_redirect "< Back", to: Routes.order_path(@socket, :index), class: "text-xs" %>
+            <div class="flex items-center justify-between mb-12">
+                <h1 class="text-xl font-bold">
+                    Track delivery status
+                </h1>
+                <h6 class="bg-gray-200 text-green-600 text-xs py-2 pr-2 pl-2 rounded-full"><%= @order.id %></h6>
+            </div>
+
+            <ul>
+                <li class="status_line text-l pb-16 step-completed"><span>Order Placed</span></li>
+                <li class="status_line text-l pb-16 current"><span>Received</span></li>
+                <li class="status_line text-l pb-16"><span>Preparing</span></li>
+                <li class="status_line text-l pb-16"><span>Delivering</span></li>
+                <li class="status_line text-l"><span>Delivered</span></li>
+            </ul>
+        </div>
+    </div>
+</section>
