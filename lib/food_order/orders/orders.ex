@@ -1,6 +1,7 @@
 defmodule FoodOrder.Orders do
   alias FoodOrder.Orders.Core.AllStatusOrders
   alias FoodOrder.Orders.Core.CreateOrderByCart
+  alias FoodOrder.Orders.Core.GetOrderByIdAndCustomerId
   alias FoodOrder.Orders.Core.ListOrdersByStatus
   alias FoodOrder.Orders.Core.ListOrdersByUserId
   alias FoodOrder.Orders.Core.UpdateOrderStatus
@@ -31,5 +32,9 @@ defmodule FoodOrder.Orders do
 
   def subscribe_user_rows(user_id) do
     UpdateOrderStatus.subscribe_user_rows(user_id)
+  end
+
+  def get_order_by_id_and_customer_id(id, customer_id) do
+    GetOrderByIdAndCustomerId.execute(id, customer_id)
   end
 end
