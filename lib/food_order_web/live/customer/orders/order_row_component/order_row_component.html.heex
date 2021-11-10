@@ -1,0 +1,14 @@
+<tr>
+    <td class="border px-4 py-2">
+        <%= live_redirect @order.id, to: "/", class: "link" %>
+    </td>
+    <td class="border px-4 py-2">
+        <%= @order.user_id %>
+    </td>
+    <td class="border px-4 py-2">
+        <%= humanize(@order.status) %>
+    </td>
+    <td class="border px-4 py-2">
+        <%= @order.inserted_at |> NaiveDateTime.to_string() %>
+    </td>
+</tr>

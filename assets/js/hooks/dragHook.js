@@ -6,7 +6,6 @@ export default {
         const hook = this;
         const selector = "#" + this.el.id
 
-        console.log(selector)
         document.querySelectorAll('.dropzone').forEach(dropzone => {
 
             new Sortable(dropzone, {
@@ -25,8 +24,6 @@ export default {
                     })
                 }
             });
-
-            console.log("here!!")
         });
     }
 };

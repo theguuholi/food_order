@@ -28,4 +28,8 @@ defmodule FoodOrder.Orders do
   def subscribe_update_order_status() do
     UpdateOrderStatus.subscribe
   end
+
+  def subscribe_user_rows(user_id) do
+    UpdateOrderStatus.subscribe_user_rows(user_id)
+  end
 end
