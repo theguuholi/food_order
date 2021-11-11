@@ -14,13 +14,13 @@ defmodule FoodOrder.Orders.Core.CreateOrderByCart do
     |> convert_item_session_to_payload_item()
     |> create_order_payload(current_user)
     |> Repo.insert()
-    |> remove_cache()
     |> broadcast(:create_order)
+    |> remove_cache()
   end
 
   def subscribe, do: PubSub.subscribe(FoodOrder.PubSub, "new_orders")
 
-  def broadcast({:error, _} = err, _e, _), do: err
+  def broadcast({:error, _} = err, _), do: err
 
   def broadcast({:ok, order} = result, event) do
     Phoenix.PubSub.broadcast(FoodOrder.PubSub, "new_orders", {event, order})
