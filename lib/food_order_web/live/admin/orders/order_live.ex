@@ -9,6 +9,7 @@ defmodule FoodOrderWeb.Admin.OrderLive do
       Orders.subscribe_update_order_status()
       Orders.subscribe_create_order()
     end
+
     {:ok, socket}
   end
 

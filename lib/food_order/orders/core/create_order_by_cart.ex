@@ -4,7 +4,6 @@ defmodule FoodOrder.Orders.Core.CreateOrderByCart do
   alias FoodOrder.Repo
   alias Phoenix.PubSub
 
-
   def execute(%{
         "address" => _address,
         "current_user" => current_user,
