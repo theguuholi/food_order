@@ -68,7 +68,7 @@ defmodule FoodOrderWeb.Products.NewProductComponentTest do
         product: %{name: "test123", price: "122", description: "pumpkin", size: "small"}
       )
       |> render_submit()
-      |> follow_redirect(conn, Routes.product_path(conn, :index))
+      |> follow_redirect(conn, Routes.admin_product_path(conn, :index))
 
     assert html =~ "Product created successfully"
     assert html =~ "test123"
