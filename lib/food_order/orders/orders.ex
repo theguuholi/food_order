@@ -27,6 +27,10 @@ defmodule FoodOrder.Orders do
     UpdateOrderStatus.execute(order_id, old_status, status)
   end
 
+  def subscribe_create_order do
+    CreateOrderByCart.subscribe()
+  end
+
   def subscribe_update_order_status do
     UpdateOrderStatus.subscribe()
   end

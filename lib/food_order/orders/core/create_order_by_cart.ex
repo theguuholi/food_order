@@ -2,6 +2,8 @@ defmodule FoodOrder.Orders.Core.CreateOrderByCart do
   alias FoodOrder.Carts
   alias FoodOrder.Orders.Data.Order
   alias FoodOrder.Repo
+  alias Phoenix.PubSub
+
 
   def execute(%{
         "address" => _address,
@@ -14,6 +16,16 @@ defmodule FoodOrder.Orders.Core.CreateOrderByCart do
     |> create_order_payload(current_user)
     |> Repo.insert()
     |> remove_cache()
+    |> broadcast(:create_order)
+  end
+
+  def subscribe, do: PubSub.subscribe(FoodOrder.PubSub, "new_orders")
+
+  def broadcast({:error, _} = err, _e, _), do: err
+
+  def broadcast({:ok, order} = result, event) do
+    Phoenix.PubSub.broadcast(FoodOrder.PubSub, "new_orders", {event, order})
+    result
   end
 
   def remove_cache({:ok, order}) do

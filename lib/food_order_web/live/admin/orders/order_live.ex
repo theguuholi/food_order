@@ -5,7 +5,10 @@ defmodule FoodOrderWeb.Admin.OrderLive do
 
   @impl true
   def mount(_assign, _session, socket) do
-    if connected?(socket), do: Orders.subscribe_update_order_status()
+    if connected?(socket) do
+      Orders.subscribe_update_order_status()
+      Orders.subscribe_create_order()
+    end
     {:ok, socket}
   end
 
@@ -18,6 +21,13 @@ defmodule FoodOrderWeb.Admin.OrderLive do
     send_update(SideMenuComponent, id: "side-menu-orders")
     send_update(OrderLayerComponent, id: old_status)
     send_update(OrderLayerComponent, id: Atom.to_string(new_status))
+    {:noreply, socket}
+  end
+
+  @impl true
+  def handle_info({:create_order, %{status: status}}, socket) do
+    send_update(OrderLayerComponent, id: Atom.to_string(status))
+    send_update(SideMenuComponent, id: "side-menu-orders")
     {:noreply, socket}
   end
 end
