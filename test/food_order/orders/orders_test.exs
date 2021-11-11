@@ -1,5 +1,7 @@
 defmodule FoodOrder.OrdersTest do
   use FoodOrder.DataCase
+  import FoodOrder.Factory
+
   import FoodOrder.AccountsFixtures
   import FoodOrder.ProductsFixtures
 
@@ -8,6 +10,32 @@ defmodule FoodOrder.OrdersTest do
   alias FoodOrder.Orders.Core.AllStatusOrders
 
   describe "create order" do
+    test "get_order_status_values " do
+      assert [
+               {:NOT_STARTED, 0},
+               {:RECEIVED, 1},
+               {:PREPARING, 2},
+               {:DELIVERING, 3},
+               {:DELIVERED, 4}
+             ] == Orders.get_order_status_values()
+    end
+
+    test "get_current_status " do
+      order = insert(:order)
+      assert 0 == Orders.get_current_status(order.status)
+    end
+
+    test "get_order_by_id_and_customer_id " do
+      order = insert(:order)
+      assert order.id == Orders.get_order_by_id_and_customer_id(order.id, order.user_id).id
+    end
+
+    test "update_order_status " do
+      order = insert(:order)
+      {:ok, result} = Orders.update_order_status(order.id, order.status, :DELIVERED)
+      refute order.status == result.status
+    end
+
     test "create_order_by_cart with success" do
       product = product_fixture()
       user = user_fixture()
