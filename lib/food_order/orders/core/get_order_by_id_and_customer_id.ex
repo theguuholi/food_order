@@ -6,6 +6,6 @@ defmodule FoodOrder.Orders.Core.GetOrderByIdAndCustomerId do
   def execute(id, customer_id) do
     Order
     |> where([o], o.id == ^id and o.user_id == ^customer_id)
-    |> Repo.one
+    |> Repo.one()
   end
 end

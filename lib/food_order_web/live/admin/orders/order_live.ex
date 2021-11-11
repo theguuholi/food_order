@@ -1,11 +1,11 @@
 defmodule FoodOrderWeb.Admin.OrderLive do
   use FoodOrderWeb, :live_view
-  alias FoodOrderWeb.Admin.Orders.{HeaderMenuComponent, OrderLayerComponent, SideMenuComponent}
   alias FoodOrder.Orders
+  alias FoodOrderWeb.Admin.Orders.{HeaderMenuComponent, OrderLayerComponent, SideMenuComponent}
 
   @impl true
   def mount(_assign, _session, socket) do
-    if connected?(socket), do: Orders.subscribe_update_order_status
+    if connected?(socket), do: Orders.subscribe_update_order_status()
     {:ok, socket}
   end
 

@@ -12,7 +12,6 @@ insert(:order)
 insert(:order)
 insert(:order)
 
-
 %User{}
 |> User.registration_changeset(%{
   email: "test@test",

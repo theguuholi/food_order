@@ -1,7 +1,7 @@
 defmodule FoodOrderWeb.Customer.OrderLive do
   use FoodOrderWeb, :live_view
-  alias FoodOrderWeb.Order.OrderRowComponent
   alias FoodOrder.Orders
+  alias FoodOrderWeb.Order.OrderRowComponent
 
   @impl true
   def mount(_assign, _session, socket) do

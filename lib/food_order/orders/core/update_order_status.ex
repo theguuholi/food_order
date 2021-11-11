@@ -7,16 +7,18 @@ defmodule FoodOrder.Orders.Core.UpdateOrderStatus do
 
   def execute(order_id, old_status, status) do
     Order
-   |> Repo.get(order_id)
-   |> Order.changeset(%{status: status})
-   |> Repo.update()
-   |> broadcast(:order_status_updated, old_status)
-   |> broadcast_row(:order_row_updated)
-   |> broadcast_order(:order_updated)
+    |> Repo.get(order_id)
+    |> Order.changeset(%{status: status})
+    |> Repo.update()
+    |> broadcast(:order_status_updated, old_status)
+    |> broadcast_row(:order_row_updated)
+    |> broadcast_order(:order_updated)
   end
 
   def subscribe, do: PubSub.subscribe(FoodOrder.PubSub, @topic)
-  def subscribe_user_rows(user_id), do: PubSub.subscribe(FoodOrder.PubSub, "update-row:#{user_id}")
+
+  def subscribe_user_rows(user_id),
+    do: PubSub.subscribe(FoodOrder.PubSub, "update-row:#{user_id}")
 
   def subscribe_order(order_id), do: PubSub.subscribe(FoodOrder.PubSub, "order:#{order_id}")
 

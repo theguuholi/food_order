@@ -1,8 +1,8 @@
 defmodule FoodOrder.Factory do
   use ExMachina.Ecto, repo: FoodOrder.Repo
+  alias FoodOrder.Accounts.User
   alias FoodOrder.Orders.Data.Order
   alias FoodOrder.Products.Product
-  alias FoodOrder.Accounts.User
   alias FoodOrder.Repo
 
   defp product do
@@ -27,7 +27,7 @@ defmodule FoodOrder.Factory do
     product()
   end
 
-  def order_factory() do
+  def order_factory do
     user =
       %User{}
       |> User.registration_changeset(%{

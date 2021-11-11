@@ -27,8 +27,8 @@ defmodule FoodOrder.Orders do
     UpdateOrderStatus.execute(order_id, old_status, status)
   end
 
-  def subscribe_update_order_status() do
-    UpdateOrderStatus.subscribe
+  def subscribe_update_order_status do
+    UpdateOrderStatus.subscribe()
   end
 
   def subscribe_user_rows(user_id) do
@@ -50,7 +50,9 @@ defmodule FoodOrder.Orders do
   end
 
   def get_current_status(current_status) do
-    {_status, value} = Enum.find(get_order_status_values(), fn {status, _index} -> status == current_status end)
+    {_status, value} =
+      Enum.find(get_order_status_values(), fn {status, _index} -> status == current_status end)
+
     value
   end
 end

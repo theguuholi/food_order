@@ -21,9 +21,7 @@ defmodule FoodOrderWeb.Admin.Orders.OrderLayerComponent do
   @impl true
   def handle_event(
         "dropped",
-        %{"orderId" => order_id,
-          "orderStatus" => next_status,
-          "orderOldStatus" => old_status},
+        %{"orderId" => order_id, "orderStatus" => next_status, "orderOldStatus" => old_status},
         socket
       ) do
     Orders.update_order_status(order_id, old_status, next_status)

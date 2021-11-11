@@ -7,12 +7,6 @@ defmodule FoodOrderWeb.Cart.Components.Order.ConfirmOrder.ConfirmOrderComponent 
   end
 
   def handle_event("create_order", params, socket) do
-    # TODO INCLUDE
-    # payment_type required
-    # status required
-    # phone required
-    # address required
-    # throw All fields are quired
     case Orders.create_order_by_cart(params) do
       {:ok, _order} ->
         socket =
