@@ -54,7 +54,7 @@ defmodule FoodOrderWeb.Cart.Components.Order.ConfirmOrder.ConfirmOrderComponentT
         view
         |> form("#confirm-order-form", %{})
         |> render_submit()
-        |> follow_redirect(conn, Routes.order_path(conn, :index))
+        |> follow_redirect(conn, Routes.customer_order_path(conn, :index))
 
       assert html =~ "Order Created with Success!"
     end

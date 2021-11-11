@@ -20,7 +20,7 @@ defmodule FoodOrderWeb.Router do
   scope "/", FoodOrderWeb do
     pipe_through :browser
 
-    scope "/admin", Admin do
+    scope "/admin", Admin, as: :admin do
       live "/products", ProductLive, :index
       live "/products/new", ProductLive, :new
       live "/orders", OrderLive, :index
@@ -31,7 +31,7 @@ defmodule FoodOrderWeb.Router do
 
       live "/cart", CartLive, :index
 
-      scope "/customer", Customer do
+      scope "/customer", Customer, as: :customer do
         live "/orders", OrderLive, :index
         live "/orders/:id", OrderLive.Status, :status
       end

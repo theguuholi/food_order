@@ -18,7 +18,7 @@ defmodule FoodOrderWeb.Cart.Components.Order.ConfirmOrder.ConfirmOrderComponent 
         socket =
           socket
           |> put_flash(:info, "Order Created with Success!")
-          |> push_redirect(to: Routes.order_path(socket, :index))
+          |> push_redirect(to: Routes.customer_order_path(socket, :index))
 
         {:noreply, socket}
 

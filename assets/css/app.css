@@ -104,7 +104,7 @@ section.login a:hover {
   padding: 30px;
   overflow: hidden;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-  animation: hide 2s 2s forwards
+  /* animation: hide 2s 2s forwards */
 }
 
 @keyframes hide {

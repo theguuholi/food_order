@@ -5,6 +5,7 @@ defmodule FoodOrder.Orders do
   alias FoodOrder.Orders.Core.ListOrdersByStatus
   alias FoodOrder.Orders.Core.ListOrdersByUserId
   alias FoodOrder.Orders.Core.UpdateOrderStatus
+  alias FoodOrder.Orders.Data.Order
 
   def create_order_by_cart(params) do
     CreateOrderByCart.execute(params)
@@ -34,7 +35,22 @@ defmodule FoodOrder.Orders do
     UpdateOrderStatus.subscribe_user_rows(user_id)
   end
 
+  def subscribe_order(order_id) do
+    UpdateOrderStatus.subscribe_order(order_id)
+  end
+
   def get_order_by_id_and_customer_id(id, customer_id) do
     GetOrderByIdAndCustomerId.execute(id, customer_id)
+  end
+
+  def get_order_status_values do
+    Order
+    |> Ecto.Enum.values(:status)
+    |> Enum.with_index()
+  end
+
+  def get_current_status(current_status) do
+    {_status, value} = Enum.find(get_order_status_values(), fn {status, _index} -> status == current_status end)
+    value
   end
 end

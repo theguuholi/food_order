@@ -1,6 +1,6 @@
 <tr>
     <td class="border px-4 py-2">
-        <%= live_redirect @order.id, to: Routes.order_status_path(@socket, :status, @order), class: "link" %>
+        <%= live_redirect @order.id, to: Routes.customer_order_status_path(@socket, :status, @order), class: "link" %>
     </td>
     <td class="border px-4 py-2">
         <%= @order.user_id %>

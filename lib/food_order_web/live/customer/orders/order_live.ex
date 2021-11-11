@@ -23,6 +23,11 @@ defmodule FoodOrderWeb.Customer.OrderLive do
 
   def handle_info({:order_row_updated, order}, socket) do
     send_update(order_row(), id: "order-row-#{order.id}", order: order)
+
+    socket =
+      socket
+      |> put_flash(:info, "Order:#{order.id} was updated!")
+
     {:noreply, socket}
   end
 end
