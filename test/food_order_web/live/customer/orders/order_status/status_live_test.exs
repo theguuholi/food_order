@@ -72,5 +72,38 @@ defmodule FoodOrderWeb.Customer.OrderLive.StatusTest do
              |> element("[data-role=status-item][data-id=NOT_STARTED]")
              |> render =~ "step-completed"
     end
+
+    test "update element status", %{conn: conn, user: user} do
+      order = insert(:order, user: user)
+      {:ok, view, _html} = live(conn, Routes.customer_order_status_path(conn, :status, order.id))
+
+      assert view
+             |> element("[data-role=status-item][data-id=NOT_STARTED]")
+             |> render =~ "current"
+
+      {:ok, order} = Orders.update_order_status(order.id, :NOT_STARTED, :RECEIVED)
+
+      assert view
+             |> element("[data-role=status-item][data-id=NOT_STARTED]")
+             |> render =~ "step-completed"
+
+      assert view
+             |> element("[data-role=status-item][data-id=RECEIVED]")
+             |> render =~ "current"
+
+      assert view |> element(".alert-info", "Order:#{order.id} was updated!")
+
+      send(view.pid, {:order_updated, %{id: 123, status: :PREPARING}})
+
+      assert view
+             |> element("[data-role=status-item][data-id=RECEIVED]")
+             |> render =~ "step-completed"
+
+      assert view
+             |> element("[data-role=status-item][data-id=PREPARING]")
+             |> render =~ "current"
+
+      assert view |> element(".alert-info", "Order:123 was updated!")
+    end
   end
 end

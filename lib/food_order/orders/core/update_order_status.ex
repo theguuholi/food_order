@@ -26,6 +26,7 @@ defmodule FoodOrder.Orders.Core.UpdateOrderStatus do
     Phoenix.PubSub.broadcast(FoodOrder.PubSub, "update-row:#{order.user_id}", {event, order})
     result
   end
+
   def broadcast_order({:ok, order} = result, event) do
     Phoenix.PubSub.broadcast(FoodOrder.PubSub, "order:#{order.id}", {event, order})
     result

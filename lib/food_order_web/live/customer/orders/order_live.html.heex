@@ -13,10 +13,12 @@
             </thead>
             <tbody>
                 <%= if @orders == nil do %>
-                <.no_orders />
+                <tr>
+                    <td class="p-4"><span>No order found!</span></td>
+                </tr>
                 <% else %>
                 <%= for order <- @orders do %>
-                    <%= live_component order_row(), id: "order-row-#{order.id}", order: order %>
+                <%= live_component order_row(), id: "order-row-#{order.id}", order: order %>
                 <% end %>
                 <% end %>
             </tbody>

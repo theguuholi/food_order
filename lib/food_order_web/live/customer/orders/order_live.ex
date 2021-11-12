@@ -13,14 +13,7 @@ defmodule FoodOrderWeb.Customer.OrderLive do
 
   def order_row, do: OrderRowComponent
 
-  def no_orders(assigns) do
-    ~H"""
-      <tr>
-        <td class="p-4"><span>No order found!</span></td>
-      </tr>
-    """
-  end
-
+  @impl true
   def handle_info({:order_row_updated, order}, socket) do
     send_update(order_row(), id: "order-row-#{order.id}", order: order)
 
