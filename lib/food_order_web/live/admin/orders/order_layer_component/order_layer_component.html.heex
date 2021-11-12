@@ -1,7 +1,7 @@
 <div class="flex-shrink-0 p-3 w-80 bg-gray-100 rounded-md m-2" data-role="order-board" data-id={@id}>
     <h3 class="text-sm font-medium text-gray-900 uppercase" data-role="order-layer-title" data-id={@id}>
         <%= humanize(@id) %></h3>
-        <ul class="mt-2 dropzone" id={@id} phx-hook="Drag">
+        <ul class="mt-2 dropzone" id={@id} phx-hook="Drag" phx-target={@myself}>
             <%= for order <- @orders do %>
             <%= live_component card(), id: order.id, card: order, board: @id %>
             <% end %>
