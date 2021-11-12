@@ -7,19 +7,19 @@
     return_to: Routes.admin_product_path(@socket, :index) %>
 <% end %>
 
-<section class="container mx-auto p-6 font-mono">
+<section class="container mx-auto p-6 font-mono" data-role="product-section">
     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
         <div class="w-full overflow-x-auto">
-            <table class="w-full" id="product-table">
+            <table class="w-full" data-role="product-table">
                 <thead>
                     <tr
                         class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
-                        <th class="px-4 py-3">Name</th>
-                        <th class="px-4 py-3">Price</th>
-                        <th class="px-4 py-3">Size</th>
-                        <th class="px-4 py-3">
+                        <th class="px-4 py-3" data-role="head-name">Name</th>
+                        <th class="px-4 py-3" data-role="head-price">Price</th>
+                        <th class="px-4 py-3" data-role="head-size">Size</th>
+                        <th class="px-4 py-3"  data-role="head-actions">
                             Actions
-                            <%= live_patch "New", to: Routes.admin_product_path(@socket, :new), id: "add-new-product", class: "px-3 py-1 rounded-full text-white font-bold btn-primary" %>
+                            <%= live_patch "New", to: Routes.admin_product_path(@socket, :new), "data-role": "add-new-product", class: "px-3 py-1 rounded-full text-white font-bold btn-primary" %>
                         </th>
                     </tr>
                 </thead>

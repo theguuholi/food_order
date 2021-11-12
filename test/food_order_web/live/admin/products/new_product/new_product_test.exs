@@ -6,7 +6,7 @@ defmodule FoodOrderWeb.Products.NewProductComponentTest do
     {:ok, view, _html} = live(conn, "/admin/products")
 
     view
-    |> element("#add-new-product", "New")
+    |> element("[data-role=add-new-product]", "New")
     |> render_click()
 
     assert_patched(view, "/admin/products/new")
