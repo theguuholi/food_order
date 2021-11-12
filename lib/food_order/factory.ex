@@ -27,14 +27,18 @@ defmodule FoodOrder.Factory do
     product()
   end
 
-  def order_factory do
+  def order_factory(attrs) do
     user =
-      %User{}
-      |> User.registration_changeset(%{
-        email: "test-#{:rand.uniform(10_000)}@test.com",
-        password: "123123123123123"
-      })
-      |> Repo.insert!()
+      if attrs[:user] do
+        attrs[:user]
+      else
+        %User{}
+        |> User.registration_changeset(%{
+          email: "test-#{:rand.uniform(10_000)}@test.com",
+          password: "123123123123123"
+        })
+        |> Repo.insert!()
+      end
 
     product_1 = %Product{} |> Product.changeset(product_map()) |> Repo.insert!()
     product_2 = %Product{} |> Product.changeset(product_map()) |> Repo.insert!()
