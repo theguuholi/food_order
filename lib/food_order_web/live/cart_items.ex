@@ -2,6 +2,8 @@ defmodule FoodOrderWeb.CartItems do
   import Phoenix.LiveView
   alias FoodOrder.Accounts
   alias FoodOrder.Carts
+  require Logger
+
 
   def mount(_params, session, socket) do
     socket =
@@ -24,10 +26,12 @@ defmodule FoodOrderWeb.CartItems do
     current_user = socket.assigns.current_user
 
     if current_user != nil do
+      Logger.info([message: "Create Session Cart", cart_id: current_user.id])
       Carts.create_session(current_user.id)
       assign(socket, cart_id: current_user.id)
     else
       cart_id = get_ip(socket)
+      Logger.info([message: "Create Session Cart Using IP", cart_id: cart_id])
       Carts.create_session(cart_id)
       assign(socket, cart_id: cart_id)
     end
