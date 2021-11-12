@@ -9,5 +9,5 @@
         <% end %>
     </div>
     <hr>
-    <%= live_component confirm_order(), order: @order %>
+    <%= live_component confirm_order(), id: "confirm-order", order: @order, current_user: @current_user %>
 </div>

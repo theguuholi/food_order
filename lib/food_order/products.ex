@@ -70,7 +70,7 @@ defmodule FoodOrder.Products do
 
   defp after_save(err, _), do: err
 
-  def subscribe, do: Phoenix.PubSub.subscribe(FoodOrders.PubSub, "products")
+  def subscribe, do: Phoenix.PubSub.subscribe(FoodOrder.PubSub, "products")
 
   def broadcast({:error, _} = err, _e), do: err
 

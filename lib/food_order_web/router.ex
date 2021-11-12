@@ -20,13 +20,21 @@ defmodule FoodOrderWeb.Router do
   scope "/", FoodOrderWeb do
     pipe_through :browser
 
-    live "/admin/products", ProductLive, :index
-    live "/admin/products/new", ProductLive, :new
+    scope "/admin", Admin, as: :admin do
+      live "/products", ProductLive, :index
+      live "/products/new", ProductLive, :new
+      live "/orders", OrderLive, :index
+    end
 
     live_session :cart, on_mount: FoodOrderWeb.CartItems do
       live "/", MainLive, :index
 
       live "/cart", CartLive, :index
+
+      scope "/customer", Customer, as: :customer do
+        live "/orders", OrderLive, :index
+        live "/orders/:id", OrderLive.Status, :status
+      end
     end
   end
 

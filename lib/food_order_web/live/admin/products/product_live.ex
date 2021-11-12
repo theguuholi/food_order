@@ -1,9 +1,9 @@
-defmodule FoodOrderWeb.ProductLive do
+defmodule FoodOrderWeb.Admin.ProductLive do
   use FoodOrderWeb, :live_view
   alias FoodOrder.Products
   alias FoodOrder.Products.Product
-  alias FoodOrderWeb.Products.NewProductComponent
-  alias FoodOrderWeb.Products.ProductItemComponent
+  alias FoodOrderWeb.Admin.Products.NewProductComponent
+  alias FoodOrderWeb.Admin.Products.ProductItemComponent
 
   @impl true
   def mount(_assign, _session, socket) do

@@ -3,11 +3,13 @@ defmodule FoodOrderWeb.UserSettingsControllerTest do
 
   alias FoodOrder.Accounts
   import FoodOrder.AccountsFixtures
+  alias FoodOrder.Carts
 
   setup :register_and_log_in_user
 
   describe "GET /users/settings" do
-    test "renders settings page", %{conn: conn} do
+    test "renders settings page", %{conn: conn, user: user} do
+      Carts.create_session(user.id)
       conn = get(conn, Routes.user_settings_path(conn, :edit))
       response = html_response(conn, 200)
       assert response =~ "<h1>Settings</h1>"
@@ -22,6 +24,8 @@ defmodule FoodOrderWeb.UserSettingsControllerTest do
 
   describe "PUT /users/settings (change password form)" do
     test "updates the user password and resets tokens", %{conn: conn, user: user} do
+      Carts.create_session(user.id)
+
       new_password_conn =
         put(conn, Routes.user_settings_path(conn, :update), %{
           "action" => "update_password",
@@ -38,7 +42,9 @@ defmodule FoodOrderWeb.UserSettingsControllerTest do
       assert Accounts.get_user_by_email_and_password(user.email, "new valid password")
     end
 
-    test "does not update password on invalid data", %{conn: conn} do
+    test "does not update password on invalid data", %{conn: conn, user: user} do
+      Carts.create_session(user.id)
+
       old_password_conn =
         put(conn, Routes.user_settings_path(conn, :update), %{
           "action" => "update_password",
@@ -62,6 +68,8 @@ defmodule FoodOrderWeb.UserSettingsControllerTest do
   describe "PUT /users/settings (change email form)" do
     @tag :capture_log
     test "updates the user email", %{conn: conn, user: user} do
+      Carts.create_session(user.id)
+
       conn =
         put(conn, Routes.user_settings_path(conn, :update), %{
           "action" => "update_email",
@@ -74,7 +82,9 @@ defmodule FoodOrderWeb.UserSettingsControllerTest do
       assert Accounts.get_user_by_email(user.email)
     end
 
-    test "does not update email on invalid data", %{conn: conn} do
+    test "does not update email on invalid data", %{conn: conn, user: user} do
+      Carts.create_session(user.id)
+
       conn =
         put(conn, Routes.user_settings_path(conn, :update), %{
           "action" => "update_email",

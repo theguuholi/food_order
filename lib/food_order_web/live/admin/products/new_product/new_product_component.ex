@@ -1,4 +1,4 @@
-defmodule FoodOrderWeb.Products.NewProductComponent do
+defmodule FoodOrderWeb.Admin.Products.NewProductComponent do
   use FoodOrderWeb, :live_component
   alias FoodOrder.Products
   alias FoodOrder.Products.Product

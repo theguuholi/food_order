@@ -6,7 +6,7 @@ defmodule FoodOrderWeb.Products.NewProductComponentTest do
     {:ok, view, _html} = live(conn, "/admin/products")
 
     view
-    |> element("#add-new-product", "New")
+    |> element("[data-role=add-new-product]", "New")
     |> render_click()
 
     assert_patched(view, "/admin/products/new")
@@ -68,7 +68,7 @@ defmodule FoodOrderWeb.Products.NewProductComponentTest do
         product: %{name: "test123", price: "122", description: "pumpkin", size: "small"}
       )
       |> render_submit()
-      |> follow_redirect(conn, Routes.product_path(conn, :index))
+      |> follow_redirect(conn, Routes.admin_product_path(conn, :index))
 
     assert html =~ "Product created successfully"
     assert html =~ "test123"

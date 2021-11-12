@@ -1,0 +1,18 @@
+<tr data-role="order-row" data-id={@order.id}>
+    <td class="border px-4 py-2" data-role="order-show-status" data-id={@order.id}>
+        <%= live_redirect @order.id, to: Routes.customer_order_status_path(@socket, :status, @order), class: "link" %>
+    </td>
+    <td class="border px-4 py-2" data-role="order-user" data-id={@order.id}>
+        <%= @order.user_id %>
+    </td>
+    <td class="border px-4 py-2" data-role="order-status" data-id={@order.id}>
+        <%= if @order.status == :DELIVERED do %>
+        <%= live_redirect humanize(@order.status), to: "/", class: "link" %>
+        <% else %>
+        <%= humanize(@order.status) %>
+        <% end %>
+    </td>
+    <td class="border px-4 py-2"  data-role="order-date" data-id={@order.id}>
+        <%= @order.inserted_at |> NaiveDateTime.to_string() %>
+    </td>
+</tr>
