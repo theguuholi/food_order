@@ -30,6 +30,11 @@ defmodule FoodOrder.OrdersTest do
       assert order.id == Orders.get_order_by_id_and_customer_id(order.id, order.user_id).id
     end
 
+    test "subscribe_order" do
+      order = insert(:order)
+      assert :ok == Orders.subscribe_order(order.id)
+    end
+
     test "update_order_status " do
       order = insert(:order)
       {:ok, result} = Orders.update_order_status(order.id, order.status, :DELIVERED)

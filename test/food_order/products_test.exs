@@ -15,6 +15,10 @@ defmodule FoodOrder.ProductsTest do
       assert Products.list_products() == [product]
     end
 
+    test "subscribe" do
+      assert Products.subscribe() == :ok
+    end
+
     test "get_product!/1 returns the product with given id" do
       product = product_fixture()
       assert Products.get_product!(product.id) == product

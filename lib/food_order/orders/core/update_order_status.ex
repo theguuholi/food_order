@@ -22,21 +22,14 @@ defmodule FoodOrder.Orders.Core.UpdateOrderStatus do
 
   def subscribe_order(order_id), do: PubSub.subscribe(FoodOrder.PubSub, "order:#{order_id}")
 
-  def broadcast_row({:error, _} = err, _e, _), do: err
-
   def broadcast_row({:ok, order} = result, event) do
     Phoenix.PubSub.broadcast(FoodOrder.PubSub, "update-row:#{order.user_id}", {event, order})
     result
   end
-
-  def broadcast_order({:error, _} = err, _e, _), do: err
-
   def broadcast_order({:ok, order} = result, event) do
     Phoenix.PubSub.broadcast(FoodOrder.PubSub, "order:#{order.id}", {event, order})
     result
   end
-
-  def broadcast({:error, _} = err, _e, _), do: err
 
   def broadcast({:ok, order} = result, event, old_status) do
     Phoenix.PubSub.broadcast(FoodOrder.PubSub, @topic, {event, order, old_status})
