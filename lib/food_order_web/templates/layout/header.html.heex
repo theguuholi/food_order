@@ -6,10 +6,12 @@
     </div>
     <div id="menu">
         <ul class="flex items-center">
+            <%= if @current_user do %>
+            <%= if @current_user.role == :ADMIN do %>
             <li class="ml-6"><%= link "Admin Products", to: Routes.admin_product_path(@conn, :index) %></li>
             <li class="ml-6"><%= link "Admin Orders", to: Routes.admin_order_path(@conn, :index) %></li>
+            <% end %>
             <li class="ml-6"><%= link "My Orders", to: Routes.customer_order_path(@conn, :index) %></li>
-            <%= if @current_user do %>
             <li class="ml-6"><%= @current_user.email %></li>
             <li class="ml-6"><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>
             <li class="ml-6"><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
