@@ -39,7 +39,6 @@ if config_env() == :prod do
     secret_key_base: secret_key_base,
     check_origin: false
 
-
   # ## Using releases
   #
   # If you are doing OTP releases, you need to instruct Phoenix

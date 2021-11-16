@@ -23,13 +23,13 @@ defmodule FoodOrderWeb.CartItems do
 
   defp create_cart(socket) do
     current_user = socket.assigns.current_user
+
     if current_user != nil do
       Logger.info(message: "Create Session Cart", cart_id: current_user.id)
       Carts.create_session(current_user.id)
       assign(socket, cart_id: current_user.id)
     else
-      IO.inspect "here!!"
-      cart_id = Ecto.UUID.generate
+      cart_id = Ecto.UUID.generate()
       Logger.info(message: "Create Session Cart Using IP", cart_id: cart_id)
       Carts.create_session(cart_id)
 
