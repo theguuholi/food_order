@@ -10,8 +10,20 @@ defmodule FoodOrder.AccountsFixtures do
   def valid_user_attributes(attrs \\ %{}) do
     Enum.into(attrs, %{
       email: unique_user_email(),
-      password: valid_user_password()
+      password: valid_user_password(),
+      role: :ADMIN
     })
+  end
+
+  def user_customer_fixture(attrs \\ %{}) do
+    user =
+      Enum.into(attrs, %{
+        email: unique_user_email(),
+        password: valid_user_password()
+      })
+
+    {:ok, user} = FoodOrder.Accounts.register_user(user)
+    user
   end
 
   def user_fixture(attrs \\ %{}) do

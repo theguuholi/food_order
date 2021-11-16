@@ -4,17 +4,26 @@ alias FoodOrder.Repo
 
 for _ <- 0..20, do: insert(:product, %{})
 
-product_1 = insert(:product, %{})
-product_2 = insert(:product, %{})
-
-insert(:order)
-insert(:order)
-insert(:order)
-insert(:order)
+insert(:product, %{})
+insert(:product, %{})
 
 %User{}
 |> User.registration_changeset(%{
-  email: "test@test",
-  password: "123123123123123"
+  email: "admin@test",
+  password: "123123123123",
+  role: "ADMIN"
 })
 |> Repo.insert!()
+
+user =
+  %User{}
+  |> User.registration_changeset(%{
+    email: "user@test",
+    password: "123123123123"
+  })
+  |> Repo.insert!()
+
+insert(:order, user: user)
+insert(:order, user: user)
+insert(:order, user: user)
+insert(:order, user: user)
