@@ -2,8 +2,8 @@
 /* @import "./phoenix.css"; */
 
 :root {
-  --primary: #fe5f1e;
-  --primary-hover: #b23301;
+  --primary: #32594f;
+  --primary-hover: darken();
   --secondary: #f8f8f8;
   --pure: #fff;
   --dark: #232323;
@@ -307,10 +307,29 @@ section.status {
   color: var(--gray);
 }
 
-.status-box ul li.current span{
+.status-box ul li.current span {
   color: var(--primary);
 }
 
 .status-box ul li.current span:after {
   background: var(--primary);
+}
+
+
+@media(max-width: 1060px) {
+  .container {
+    max-width: 90%;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+@media(max-width: 768px) {
+  .status-box ul li span:before {
+    font-style: 34px;
+  }
 }
