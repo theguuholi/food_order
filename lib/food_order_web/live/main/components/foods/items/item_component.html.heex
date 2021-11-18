@@ -1,4 +1,4 @@
-<div class="w-64 shadow-lg rounded-lg p-4" id={"food-item-" <> @product.id}>
+<div class="md:w-64 shadow-lg rounded-lg p-4" id={"food-item-" <> @product.id}>
     <img src={Routes.static_path(@socket, "/images/food.svg" )} alt="" class="h-40 mb-4 mx-auto">
     <div class="text-center">
         <h2 class="mb-4 text-lg" id={"food-item-name-" <> @product.id}><%= @product.name %></h2>

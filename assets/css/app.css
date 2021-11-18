@@ -314,3 +314,10 @@ section.status {
 .status-box ul li.current span:after {
   background: var(--primary);
 }
+
+
+@media(max-width: 1060px) {
+  .container{
+    max-width: 90%;
+  }
+}
