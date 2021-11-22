@@ -3,16 +3,27 @@ defmodule FoodOrderWeb.Admin.ProductLive do
   alias FoodOrder.Products
   alias FoodOrder.Products.Product
   alias FoodOrderWeb.Admin.Products.NewProductComponent
+  alias FoodOrderWeb.Admin.Products.Paginate
   alias FoodOrderWeb.Admin.Products.ProductItemComponent
 
   @impl true
   def mount(_assign, _session, socket) do
-    products = Products.list_products()
-    {:ok, assign(socket, products: products), temporary_assigns: [products: []]}
+    {:ok, socket, temporary_assigns: [products: []]}
   end
 
   def product_item, do: ProductItemComponent
   def new_product, do: NewProductComponent
+  def paginate, do: Paginate
+
+  @impl true
+  def handle_params(params, _, socket) do
+    page = String.to_integer(params["page"] || "1")
+    per_page = String.to_integer(params["per_page"] || "4")
+    paginate = %{page: page, per_page: per_page}
+    products = Products.list_products(paginate: paginate)
+
+    {:noreply, assign(socket, products: products, paginate: paginate)}
+  end
 
   @impl true
   def handle_info({:product_created, product}, socket) do

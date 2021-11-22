@@ -7,6 +7,9 @@
     return_to: Routes.admin_product_path(@socket, :index) %>
 <% end %>
 
+
+<%= live_component paginate(), id: "products-paginate", paginate: @paginate %>
+
 <section class="container mx-auto p-6 font-mono" data-role="product-section">
     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
         <div class="w-full overflow-x-auto">
@@ -17,13 +20,13 @@
                         <th class="px-4 py-3" data-role="head-name">Name</th>
                         <th class="px-4 py-3" data-role="head-price">Price</th>
                         <th class="px-4 py-3" data-role="head-size">Size</th>
-                        <th class="px-4 py-3"  data-role="head-actions">
+                        <th class="px-4 py-3" data-role="head-actions">
                             Actions
                             <%= live_patch "New", to: Routes.admin_product_path(@socket, :new), "data-role": "add-new-product", class: "px-3 py-1 rounded-full text-white font-bold btn-primary" %>
                         </th>
                     </tr>
                 </thead>
-                <tbody class="bg-white" id="product-list" phx-update="prepend">
+                <tbody class="bg-white" id="product-list">
                     <%= for product <- @products do %>
                     <%= live_component @socket, product_item(), id: product.id, product: product %>
                     <% end %>
