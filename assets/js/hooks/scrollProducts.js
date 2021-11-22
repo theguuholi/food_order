@@ -1,13 +1,11 @@
 const ScrollProducts = {
     mounted(){
-        console.log("here!!")
-        console.log("mounted", this.el)
+        const selector = "#" + this.el.id
         this.observer = new IntersectionObserver(entries => {
             const entry = entries[0];
-            console.log(entries)
             if(entry.isIntersecting){
                 console.log(entry)
-                this.pushEventTo(entry.target.id, "load_products", {})
+                this.pushEventTo(selector, "load_products", {})
             }
         })
         this.observer.observe(this.el)
@@ -17,7 +15,7 @@ const ScrollProducts = {
         console.log("updated", pageNumber)
     },
     destroyed(){
-        // this.observer.disconnect();
+        this.observer.disconnect();
     }
 }
 

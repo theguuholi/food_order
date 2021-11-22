@@ -22,11 +22,9 @@ defmodule FoodOrderWeb.Main.Components.FoodsComponent do
 
   @impl true
   def handle_event("load_products", _, socket) do
-    socket =
-      socket
-      |> update(:page, &(&1 + 1))
-      |> assign_products
-
-    {:noreply, socket}
+    {:noreply,
+     socket
+     |> update(:page, &(&1 + 1))
+     |> assign_products}
   end
 end
