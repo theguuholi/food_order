@@ -22,17 +22,15 @@ defmodule FoodOrderWeb.Admin.ProductLive do
     paginate = %{page: page, per_page: per_page}
     products = Products.list_products(paginate: paginate)
 
-    {:noreply, assign(socket, products: products, paginate: paginate)}
+    {:noreply,
+     socket
+     |> assign(products: products, paginate: paginate)
+     |> apply_action(socket.assigns.live_action, params)}
   end
 
   @impl true
   def handle_info({:product_created, product}, socket) do
     {:noreply, update(socket, :products, &[product | &1])}
-  end
-
-  @impl true
-  def handle_params(params, _url, socket) do
-    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
   defp apply_action(socket, :index, _params) do
