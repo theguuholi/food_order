@@ -8,7 +8,11 @@
 <% end %>
 
 
-<%= live_component paginate(), id: "products-paginate", paginate: @paginate %>
+<header class="flex justify-between py-3 mx-auto p-6 items-center border-b border-gray-200">
+    <%= live_component filter_by_name(), id: "filter_by_name" %>
+    <%= live_component paginate(), id: "products-paginate", paginate: @paginate %>
+</header>
+
 
 <section class="container mx-auto p-6 font-mono" data-role="product-section">
     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">

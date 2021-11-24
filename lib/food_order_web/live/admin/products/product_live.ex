@@ -2,6 +2,7 @@ defmodule FoodOrderWeb.Admin.ProductLive do
   use FoodOrderWeb, :live_view
   alias FoodOrder.Products
   alias FoodOrder.Products.Product
+  alias FoodOrderWeb.Admin.Products.FilterByName
   alias FoodOrderWeb.Admin.Products.NewProductComponent
   alias FoodOrderWeb.Admin.Products.Paginate
   alias FoodOrderWeb.Admin.Products.ProductItemComponent
@@ -14,6 +15,7 @@ defmodule FoodOrderWeb.Admin.ProductLive do
   def product_item, do: ProductItemComponent
   def new_product, do: NewProductComponent
   def paginate, do: Paginate
+  def filter_by_name, do: FilterByName
 
   @impl true
   def handle_params(params, _, socket) do
