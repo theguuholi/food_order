@@ -32,3 +32,5 @@ npm-debug.log
 /priv/static/uploads/*
 
 /.DS_Store
+
+/.elixir_ls/
