@@ -2,26 +2,37 @@ defmodule FoodOrderWeb.Admin.ProductLive do
   use FoodOrderWeb, :live_view
   alias FoodOrder.Products
   alias FoodOrder.Products.Product
+  alias FoodOrderWeb.Admin.Products.FilterByName
   alias FoodOrderWeb.Admin.Products.NewProductComponent
+  alias FoodOrderWeb.Admin.Products.Paginate
   alias FoodOrderWeb.Admin.Products.ProductItemComponent
 
   @impl true
   def mount(_assign, _session, socket) do
-    products = Products.list_products()
-    {:ok, assign(socket, products: products), temporary_assigns: [products: []]}
+    {:ok, socket, temporary_assigns: [products: []]}
   end
 
   def product_item, do: ProductItemComponent
   def new_product, do: NewProductComponent
+  def paginate, do: Paginate
+  def filter_by_name, do: FilterByName
+
+  @impl true
+  def handle_params(params, _, socket) do
+    page = String.to_integer(params["page"] || "1")
+    per_page = String.to_integer(params["per_page"] || "4")
+    paginate = %{page: page, per_page: per_page}
+    products = Products.list_products(paginate: paginate)
+
+    {:noreply,
+     socket
+     |> assign(products: products, paginate: paginate)
+     |> apply_action(socket.assigns.live_action, params)}
+  end
 
   @impl true
   def handle_info({:product_created, product}, socket) do
     {:noreply, update(socket, :products, &[product | &1])}
-  end
-
-  @impl true
-  def handle_params(params, _url, socket) do
-    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
   defp apply_action(socket, :index, _params) do

@@ -8,6 +8,17 @@ defmodule FoodOrder.Products do
 
   alias FoodOrder.Products.Product
 
+  def list_products(criteria) when is_list(criteria) do
+    query = from(p in Product)
+
+    criteria
+    |> Enum.reduce(query, fn
+      {:paginate, %{page: page, per_page: per_page}}, query ->
+        from q in query, offset: ^((page - 1) * per_page), limit: ^per_page
+    end)
+    |> Repo.all()
+  end
+
   @doc """
   Returns the list of products.
 

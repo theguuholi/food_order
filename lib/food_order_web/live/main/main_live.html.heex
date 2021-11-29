@@ -1,4 +1,4 @@
 <div id="user-session" phx-hook="CartSession">
     <%= live_component hero() %>
-    <%= live_component foods(), cart_id: @cart_id %>
+    <%= live_component foods(), id: "products-catalog-list", cart_id: @cart_id %>
 </div>
