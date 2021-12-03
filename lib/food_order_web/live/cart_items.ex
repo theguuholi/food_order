@@ -5,10 +5,11 @@ defmodule FoodOrderWeb.CartItems do
   require Logger
 
   def mount(_params, session, socket) do
+    cart_id = get_connect_params(socket)["cart_id"]
     socket =
       socket
       |> assign_user(session["user_token"])
-      |> create_cart()
+      |> create_cart(cart_id)
 
     {:cont, socket}
   end
@@ -21,15 +22,20 @@ defmodule FoodOrderWeb.CartItems do
     assign_new(socket, :current_user, fn -> Accounts.get_user_by_session_token(user_token) end)
   end
 
-  defp create_cart(socket) do
+  defp create_cart(socket, cart_id) do
+    IO.inspect cart_id, label: "cart_id 123"
     current_user = socket.assigns.current_user
 
     if current_user != nil do
       Logger.info(message: "Create Session Cart", cart_id: current_user.id)
+      cart_id = current_user.id
       Carts.create_session(current_user.id)
-      assign(socket, cart_id: current_user.id)
+      socket
+      |> assign(cart_id: current_user.id)
+      |> push_event("create-session-id", %{"cartId" => cart_id})
+
     else
-      cart_id = Ecto.UUID.generate()
+      cart_id = cart_id == nil && Ecto.UUID.generate() || cart_id
       Logger.info(message: "Create Session Cart Using IP", cart_id: cart_id)
       Carts.create_session(cart_id)
 

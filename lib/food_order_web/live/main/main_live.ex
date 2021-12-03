@@ -3,7 +3,7 @@ defmodule FoodOrderWeb.MainLive do
   alias FoodOrderWeb.Main.Components.FoodsComponent
   alias FoodOrderWeb.Main.Components.HeroComponent
 
-  def mount(_assign, _session, socket) do
+  def mount(_params, _session, socket) do
     {:ok, socket}
   end
 
