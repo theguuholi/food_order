@@ -10,6 +10,10 @@ defmodule FoodOrderWeb.Endpoint do
     signing_salt: "n1ibdbe7"
   ]
 
+  socket "/socket", FoodOrderWeb.UserSocket,
+    websocket: true,
+    longpoll: false
+
   socket "/live", Phoenix.LiveView.Socket,
     websocket: [connect_info: [:peer_data, session: @session_options]]
 
