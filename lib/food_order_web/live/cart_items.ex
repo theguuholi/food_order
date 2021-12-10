@@ -4,7 +4,7 @@ defmodule FoodOrderWeb.CartItems do
   alias FoodOrder.Carts
   require Logger
 
-  def mount(_params, session, socket) do
+  def mount(params, session, socket) do
     cart_id = get_connect_params(socket)["cart_id"]
 
     socket =
@@ -24,7 +24,6 @@ defmodule FoodOrderWeb.CartItems do
   end
 
   defp create_cart(socket, cart_id) do
-    IO.inspect(cart_id, label: "cart_id 123")
     current_user = socket.assigns.current_user
 
     if current_user != nil do
