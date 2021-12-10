@@ -1,5 +1,5 @@
 <%= if @live_action in [:new, :edit] do %>
-<%= live_modal new_product(),
+<%= live_modal NewProductComponent,
     id: @product.id || :new,
     title: @page_title,
     action: @live_action,
@@ -7,10 +7,9 @@
     return_to: Routes.admin_product_path(@socket, :index) %>
 <% end %>
 
-
 <header class="flex justify-between py-3 mx-auto p-6 items-center border-b border-gray-200">
-    <%= live_component filter_by_name(), id: "filter_by_name" %>
-    <%= live_component paginate(), id: "products-paginate", paginate: @paginate %>
+    <%= live_component FilterByName, id: "filter_by_name" %>
+    <%= live_component Paginate, id: "products-paginate", paginate: @paginate %>
 </header>
 
 
@@ -32,7 +31,7 @@
                 </thead>
                 <tbody class="bg-white" id="product-list">
                     <%= for product <- @products do %>
-                    <%= live_component @socket, product_item(), id: product.id, product: product %>
+                    <%= live_component @socket, ProductItemComponent, id: product.id, product: product %>
                     <% end %>
                 </tbody>
             </table>

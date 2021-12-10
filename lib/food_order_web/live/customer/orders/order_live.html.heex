@@ -18,7 +18,7 @@
                 </tr>
                 <% else %>
                 <%= for order <- @orders do %>
-                <%= live_component order_row(), id: "order-row-#{order.id}", order: order %>
+                <%= live_component OrderRowComponent, id: "order-row-#{order.id}", order: order %>
                 <% end %>
                 <% end %>
             </tbody>

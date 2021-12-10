@@ -12,11 +12,6 @@ defmodule FoodOrderWeb.Admin.ProductLive do
     {:ok, socket, temporary_assigns: [products: []]}
   end
 
-  def product_item, do: ProductItemComponent
-  def new_product, do: NewProductComponent
-  def paginate, do: Paginate
-  def filter_by_name, do: FilterByName
-
   @impl true
   def handle_params(params, _, socket) do
     page = String.to_integer(params["page"] || "1")

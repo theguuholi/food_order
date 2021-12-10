@@ -15,8 +15,4 @@ defmodule FoodOrderWeb.CartLive do
      |> assign(cart_id: cart_id)
      |> assign(current_user: current_user)}
   end
-
-  def empty_cart, do: EmptyCartComponent
-  @spec order :: FoodOrderWeb.Cart.Components.OrderComponent
-  def order, do: OrderComponent
 end
