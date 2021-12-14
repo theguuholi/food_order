@@ -2,6 +2,7 @@ defmodule FoodOrderWeb.Router do
   use FoodOrderWeb, :router
 
   import FoodOrderWeb.UserAuth
+  alias FoodOrderWeb.Plug.CreateSession
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -11,6 +12,7 @@ defmodule FoodOrderWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug :fetch_current_user
+    plug CreateSession
   end
 
   # pipeline :api do
