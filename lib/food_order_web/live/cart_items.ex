@@ -1,8 +1,6 @@
 defmodule FoodOrderWeb.CartItems do
   import Phoenix.LiveView
   alias FoodOrder.Accounts
-  alias FoodOrder.Carts
-  require Logger
 
   def mount(_params, session, socket) do
     # cart_id = get_connect_params(socket)["cart_id"]
@@ -23,8 +21,6 @@ defmodule FoodOrderWeb.CartItems do
   end
 
   defp create_cart(socket, cart_id) do
-      Logger.info(message: "Create Session Cart", cart_id: cart_id)
-      Carts.create_session(cart_id)
       assign(socket, cart_id: cart_id)
       # |> push_event("create-session-id", %{"cartId" => cart_id})
   end
