@@ -2,8 +2,8 @@
 /* @import "./phoenix.css"; */
 
 :root {
-  --primary: #32594f;
-  --primary-hover: darken();
+  --primary: #fe5f1e;
+  --primary-hover: #e7571f;
   --secondary: #f8f8f8;
   --pure: #fff;
   --dark: #232323;
