@@ -50,6 +50,8 @@ defmodule FoodOrder.Factory do
 
     %Order{
       user_id: user.id,
+      address: Faker.Address.PtBr.street_address(),
+      phone_number: Faker.Phone.PtBr.phone(),
       items: [
         %{
           quantity: 2,

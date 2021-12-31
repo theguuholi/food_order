@@ -6,6 +6,7 @@ defmodule FoodOrderWeb.CartItems do
 
   def mount(_params, session, socket) do
     cart_id = get_connect_params(socket)["cart_id"]
+
     socket =
       socket
       |> assign_user(session["user_token"])
@@ -23,19 +24,18 @@ defmodule FoodOrderWeb.CartItems do
   end
 
   defp create_cart(socket, cart_id) do
-    IO.inspect cart_id, label: "cart_id 123"
     current_user = socket.assigns.current_user
 
     if current_user != nil do
       Logger.info(message: "Create Session Cart", cart_id: current_user.id)
       cart_id = current_user.id
       Carts.create_session(current_user.id)
+
       socket
       |> assign(cart_id: current_user.id)
       |> push_event("create-session-id", %{"cartId" => cart_id})
-
     else
-      cart_id = cart_id == nil && Ecto.UUID.generate() || cart_id
+      cart_id = (cart_id == nil && Ecto.UUID.generate()) || cart_id
       Logger.info(message: "Create Session Cart Using IP", cart_id: cart_id)
       Carts.create_session(cart_id)
 
