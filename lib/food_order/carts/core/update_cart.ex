@@ -3,16 +3,7 @@ defmodule FoodOrder.Carts.Core.UpdateCart do
 
   def remove(cart, product_id) do
     {items, product_removed} =
-      cart.items
-      |> Enum.reduce({[], nil}, fn product, acc ->
-        if product.item.id == product_id do
-          {list, _product_acc} = acc
-          {list, product}
-        else
-          {list, product_acc} = acc
-          {[product] ++ list, product_acc}
-        end
-      end)
+      Enum.reduce(cart.items, {[], nil}, &remove_item(&1, &2, product_id))
 
     remove_value = Money.multiply(product_removed.item.price, product_removed.qty)
 
@@ -22,6 +13,16 @@ defmodule FoodOrder.Carts.Core.UpdateCart do
         total_qty: cart.total_qty - product_removed.qty,
         total_price: Money.subtract(cart.total_price, remove_value)
     }
+  end
+
+  defp remove_item(product, acc, product_id) do
+    if product.item.id == product_id do
+      {list, _product_acc} = acc
+      {list, product}
+    else
+      {list, product_acc} = acc
+      {[product] ++ list, product_acc}
+    end
   end
 
   def add(cart, product_id) do
