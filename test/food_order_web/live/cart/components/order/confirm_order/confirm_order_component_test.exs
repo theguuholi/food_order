@@ -52,7 +52,7 @@ defmodule FoodOrderWeb.Cart.Components.Order.ConfirmOrder.ConfirmOrderComponentT
 
       {:ok, _, html} =
         view
-        |> form("#confirm-order-form", %{})
+        |> form("#confirm-order-form", %{"phone_number" => "+5511912341234", "address" => "Av 123 abc 12333"})
         |> render_submit()
         |> follow_redirect(conn, Routes.customer_order_path(conn, :index))
 
