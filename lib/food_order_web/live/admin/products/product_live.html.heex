@@ -1,5 +1,5 @@
 <%= if @live_action in [:new, :edit] do %>
-<%= live_modal new_product(),
+<%= live_modal NewProductComponent,
     id: @product.id || :new,
     title: @page_title,
     action: @live_action,
@@ -9,8 +9,8 @@
 
 
 <header class="flex justify-between py-3 mx-auto p-6 items-center border-b border-gray-200">
-    <%= live_component filter_by_name(), id: "filter_by_name" %>
-    <%= live_component paginate(), id: "products-paginate", paginate: @paginate %>
+    <%= live_component FilterByName, id: "filter_by_name" %>
+    <%= live_component Paginate, id: "products-paginate", options: @options %>
 </header>
 
 
@@ -21,11 +21,8 @@
                 <thead>
                     <tr
                         class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
-                        <th class="px-4 py-3 flex" data-role="head-name">
-                            <a href="#">
-                                <span class="pr-2">Name</span>
-                                <%= render FoodOrderWeb.IconView, "sort-descending.html", %{color: "#fe5f1e"} %>
-                            </a>
+                        <th class="px-4 py-3" data-role="head-name">
+                            <%= live_component @socket, SortHeader, id: :sort_by_name, options: @options, sort_by: :name %>
                         </th>
                         <th class="px-4 py-3" data-role="head-price">
                             <a href="#">
@@ -44,7 +41,7 @@
                 </thead>
                 <tbody class="bg-white" id="product-list">
                     <%= for product <- @products do %>
-                    <%= live_component @socket, product_item(), id: product.id, product: product %>
+                    <%= live_component @socket, ProductItemComponent, id: product.id, product: product %>
                     <% end %>
                 </tbody>
             </table>
