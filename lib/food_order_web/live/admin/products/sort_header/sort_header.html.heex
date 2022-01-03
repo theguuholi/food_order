@@ -1,0 +1,13 @@
+<div>
+    <%= live_patch to: Routes.admin_product_path(@socket, :index,
+        page: @options.page,
+        per_page: @options.per_page,
+        sort_by: @sort_by,
+        sort_order: @options.sort_order
+        ) do %>
+    <div class="flex">
+        <span class="pr-2">Name</span>
+        <%= render FoodOrderWeb.IconView, @icon, %{color: @color} %>
+    </div>
+    <% end %>
+</div>
