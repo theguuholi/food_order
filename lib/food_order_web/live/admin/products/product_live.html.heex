@@ -21,8 +21,20 @@
                 <thead>
                     <tr
                         class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
-                        <th class="px-4 py-3" data-role="head-name">Name</th>
-                        <th class="px-4 py-3" data-role="head-price">Price</th>
+                        <th class="px-4 py-3 flex" data-role="head-name">
+                            <a href="#">
+                                <span class="pr-2">Name</span>
+                                <%= render FoodOrderWeb.IconView, "sort-descending.html", %{color: "#fe5f1e"} %>
+                            </a>
+                        </th>
+                        <th class="px-4 py-3" data-role="head-price">
+                            <a href="#">
+                                <div class="flex">
+                                    <span class="pr-2">Price</span>
+                                    <%= render FoodOrderWeb.IconView, "sort-descending.html", %{color: "#ccc"} %>
+                                </div>
+                            </a>
+                        </th>
                         <th class="px-4 py-3" data-role="head-size">Size</th>
                         <th class="px-4 py-3" data-role="head-actions">
                             Actions

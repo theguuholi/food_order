@@ -17,6 +17,10 @@ body {
   color: var(--dark);
 }
 
+.primary-color{
+  color: #fe5f1e;
+}
+
 
 nav#header-menu li:last-child a {
   background-color: var(--primary);
