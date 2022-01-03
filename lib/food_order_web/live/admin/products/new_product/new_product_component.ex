@@ -22,7 +22,6 @@ defmodule FoodOrderWeb.Admin.Products.NewProductComponent do
 
   defp consume_photos(socket, product) do
     consume_uploaded_entries(socket, :photo, fn meta, entry ->
-      IO.inspect filename(entry), label: "filename"
       dest = Path.join("priv/static/uploads", filename(entry))
       File.cp!(meta.path, dest)
       # Routes.static_path(socket, "/uploads/#{filename(entry)}")
