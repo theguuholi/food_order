@@ -24,9 +24,9 @@ defmodule FoodOrderWeb.Admin.OrdersTest do
       Carts.update_cart(product, user.id)
 
       payload = %{
-        "address" => nil,
+        "address" => Faker.Address.PtBr.street_address(),
         "current_user" => user.id,
-        "phone_number" => nil
+        "phone_number" => Faker.Phone.PtBr.phone()
       }
 
       {:ok, order} = Orders.create_order_by_cart(payload)
@@ -48,9 +48,9 @@ defmodule FoodOrderWeb.Admin.OrdersTest do
       Carts.update_cart(product, user.id)
 
       payload = %{
-        "address" => nil,
+        "address" => Faker.Address.PtBr.street_address(),
         "current_user" => user.id,
-        "phone_number" => nil
+        "phone_number" => Faker.Phone.PtBr.phone()
       }
 
       {:ok, order} = Orders.create_order_by_cart(payload)

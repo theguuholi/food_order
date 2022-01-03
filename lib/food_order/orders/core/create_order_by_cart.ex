@@ -5,14 +5,14 @@ defmodule FoodOrder.Orders.Core.CreateOrderByCart do
   alias Phoenix.PubSub
 
   def execute(%{
-        "address" => _address,
+        "address" => address,
         "current_user" => current_user,
-        "phone_number" => _phone_number
+        "phone_number" => phone_number
       }) do
     current_user
     |> Carts.get_cart()
     |> convert_item_session_to_payload_item()
-    |> create_order_payload(current_user)
+    |> create_order_payload(current_user, address, phone_number)
     |> Repo.insert()
     |> broadcast(:create_order)
     |> remove_cache()
@@ -43,12 +43,14 @@ defmodule FoodOrder.Orders.Core.CreateOrderByCart do
     {cart, payload_items}
   end
 
-  defp create_order_payload({cart, payload_items}, user_id) do
+  defp create_order_payload({cart, payload_items}, user_id, address, phone_number) do
     total_price = cart.total_price
     total_quantity = cart.total_qty
 
     changeset = %{
       user_id: user_id,
+      address: address,
+      phone_number: phone_number,
       items: payload_items,
       total_quantity: total_quantity,
       total_price: total_price

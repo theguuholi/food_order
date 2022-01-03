@@ -49,9 +49,9 @@ defmodule FoodOrder.OrdersTest do
       assert 1 == Carts.get_cart(user.id).total_qty
 
       payload = %{
-        "address" => nil,
+        "address" => Faker.Address.PtBr.street_address(),
         "current_user" => user.id,
-        "phone_number" => nil
+        "phone_number" => Faker.Phone.PtBr.phone()
       }
 
       {:ok, result} = Orders.create_order_by_cart(payload)

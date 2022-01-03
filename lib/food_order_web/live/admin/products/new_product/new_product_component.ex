@@ -31,7 +31,7 @@ defmodule FoodOrderWeb.Admin.Products.NewProductComponent do
   end
 
   defp filename(entry) do
-    ext = MIME.extensions(entry.client_type)
+    [ext | _] = MIME.extensions(entry.client_type)
     "#{entry.uuid}.#{ext}"
   end
 

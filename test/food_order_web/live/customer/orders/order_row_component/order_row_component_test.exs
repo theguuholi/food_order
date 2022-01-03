@@ -13,7 +13,7 @@ defmodule FoodOrderWeb.Order.OrderRowComponentTest do
 
       assert has_element?(view, "[data-role=order-row][data-id=#{order.id}]")
       assert has_element?(view, "[data-role=order-show-status][data-id=#{order.id}]", order.id)
-      assert has_element?(view, "[data-role=order-user][data-id=#{order.id}]", order.user_id)
+      assert has_element?(view, "[data-role=order-user][data-id=#{order.id}]", order.address)
 
       assert has_element?(
                view,
