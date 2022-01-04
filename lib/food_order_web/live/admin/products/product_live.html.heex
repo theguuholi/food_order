@@ -25,12 +25,7 @@
                             <%= live_component @socket, SortHeader, id: :sort_by_name, options: @options, sort_by: :name %>
                         </th>
                         <th class="px-4 py-3" data-role="head-price">
-                            <a href="#">
-                                <div class="flex">
-                                    <span class="pr-2">Price</span>
-                                    <%= render FoodOrderWeb.IconView, "sort-descending.html", %{color: "#ccc"} %>
-                                </div>
-                            </a>
+                            <%= live_component @socket, SortHeader, id: :sort_by_price, options: @options, sort_by: :price %>
                         </th>
                         <th class="px-4 py-3" data-role="head-size">Size</th>
                         <th class="px-4 py-3" data-role="head-actions">
