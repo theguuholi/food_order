@@ -25,11 +25,17 @@ defmodule FoodOrderWeb.Admin.Products.ProductLiveTest do
 
     test "sorting using url", %{conn: conn} do
       for _ <- 1..10, do: insert(:product)
-      filter = [sort: %{sort_by: :name, sort_order: :desc}]
-      [product_1 | product_2] = Products.list_products(filter)
+
+      filter = [
+        paginate: %{page: 2, per_page: 2},
+        sort: %{sort_by: :name, sort_order: :desc},
+        name: ""
+      ]
+
+      [product_1, product_2] = Products.list_products(filter)
 
       {:ok, view, _} =
-        live(conn, "/admin/products?page=2&per_page=2&sort_by=name&sort_order=desc")
+        live(conn, "/admin/products?page=2&per_page=2&sort_by=name&sort_order=desc&name=")
 
       assert has_element?(view, "#product-item-#{product_1.id}", product_1.name)
       assert has_element?(view, "#product-item-#{product_2.id}", product_2.name)
@@ -42,13 +48,13 @@ defmodule FoodOrderWeb.Admin.Products.ProductLiveTest do
       |> element("[data-role=sort][data-id=name]", "Name")
       |> render_click()
 
-      assert_patched(view, "/admin/products?page=1&per_page=4&sort_by=name&sort_order=asc")
+      assert_patched(view, "/admin/products?page=1&per_page=4&sort_by=name&sort_order=asc&name=")
 
       view
       |> element("[data-role=sort][data-id=name]", "Name")
       |> render_click()
 
-      assert_patched(view, "/admin/products?page=1&per_page=4&sort_by=name&sort_order=desc")
+      assert_patched(view, "/admin/products?page=1&per_page=4&sort_by=name&sort_order=desc&name=")
     end
 
     test "clicking next, previous, and page a", %{conn: conn} do
@@ -58,19 +64,28 @@ defmodule FoodOrderWeb.Admin.Products.ProductLiveTest do
       |> element("[data-role=paginate][data-id=next]", ">>")
       |> render_click()
 
-      assert_patched(view, "/admin/products?page=2&per_page=1&sort_by=updated_at&sort_order=desc")
+      assert_patched(
+        view,
+        "/admin/products?page=2&per_page=1&sort_by=updated_at&name=&sort_order=desc"
+      )
 
       view
       |> element("[data-role=paginate][data-id=previous]", "<<")
       |> render_click()
 
-      assert_patched(view, "/admin/products?page=1&per_page=1&sort_by=updated_at&sort_order=desc")
+      assert_patched(
+        view,
+        "/admin/products?page=1&per_page=1&sort_by=updated_at&name=&sort_order=desc"
+      )
 
       view
       |> element("[data-role=paginate][data-id=3]", "3")
       |> render_click()
 
-      assert_patched(view, "/admin/products?page=3&per_page=1&sort_by=updated_at&sort_order=desc")
+      assert_patched(
+        view,
+        "/admin/products?page=3&per_page=1&sort_by=updated_at&name=&sort_order=desc"
+      )
     end
 
     test "test pagination using url_params", %{conn: conn} do

@@ -10,7 +10,7 @@
 
 <header class="flex justify-between py-3 mx-auto p-6 items-center border-b border-gray-200">
     <%= live_component FilterByName, id: "filter_by_name", name: @name, loading: @loading %>
-    <%= live_component Paginate, id: "products-paginate", options: @options %>
+    <%= live_component Paginate, id: "products-paginate", options: @options, name: @name %>
 </header>
 
 <%= if @loading do %>
@@ -33,10 +33,10 @@
                     <tr
                         class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
                         <th class="px-4 py-3" data-role="head-name">
-                            <%= live_component @socket, SortHeader, id: :sort_by_name, options: @options, sort_by: :name %>
+                            <%= live_component @socket, SortHeader, id: :sort_by_name, options: @options, sort_by: :name, name: @name %>
                         </th>
                         <th class="px-4 py-3" data-role="head-price">
-                            <%= live_component @socket, SortHeader, id: :sort_by_price, options: @options, sort_by: :price %>
+                            <%= live_component @socket, SortHeader, id: :sort_by_price, options: @options, sort_by: :price, name: @name %>
                         </th>
                         <th class="px-4 py-3" data-role="head-size">Size</th>
                         <th class="px-4 py-3" data-role="head-actions">

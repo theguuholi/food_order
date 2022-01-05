@@ -7,8 +7,7 @@ defmodule FoodOrderWeb.Admin.Products.SortHeader do
      |> assign(assigns)
      |> assign_color(assigns)
      |> assign_icon_name(assigns)
-     |> assign_sort_order(assigns)
-    }
+     |> assign_sort_order(assigns)}
   end
 
   defp assign_color(socket, %{sort_by: sort_by, options: %{sort_by: sort_by_options}}) do

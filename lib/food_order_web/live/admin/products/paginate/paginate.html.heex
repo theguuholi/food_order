@@ -2,7 +2,7 @@
     <div class="flex primary-color">
         <%= if @options.page > 1 do %>
         <div class="h-8 w-8 mr-1 flex justify-center items-center  cursor-pointer">
-            <.pagination_link text="<<" page={@options.page - 1} options={@options} socket={@socket}
+            <.pagination_link text="<<" page={@options.page - 1} options={@options} socket={@socket} name={@name}
                 data_id="previous" />
         </div>
         <% end %>
@@ -10,12 +10,12 @@
             <%= for i <- (@options.page - 2)..(@options.page + 2), i > 0 do %>
             <div class={"w-8 md:flex justify-center items-center hidden cursor-pointer leading-5 transition duration-150
                 ease-in border-t-2 #{i==@options.page && "border-yellow-600" || "border-transparent" }"}>
-                <.pagination_link text={i} page={i} options={@options} socket={@socket} data_id={i} />
+                <.pagination_link text={i} page={i} options={@options}  name={@name} socket={@socket} data_id={i} />
             </div>
             <% end %>
         </div>
         <div class="h-8 w-8 ml-1 flex justify-center items-center  cursor-pointer">
-            <.pagination_link text=">>" page={@options.page + 1} options={@options} socket={@socket} data_id="next" />
+            <.pagination_link text=">>" page={@options.page + 1} options={@options}  name={@name} socket={@socket} data_id="next" />
         </div>
     </div>
 </div>
