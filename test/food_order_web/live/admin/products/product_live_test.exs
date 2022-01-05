@@ -21,7 +21,19 @@ defmodule FoodOrderWeb.Admin.Products.ProductLiveTest do
       assert has_element?(view, "[data-role=add-new-product]", "New")
     end
 
-    # Test search
+    test "filter by name", %{conn: conn} do
+      [product_1 | _] = for _ <- 1..10, do: insert(:product)
+      {:ok, view, _} = live(conn, "/admin/products")
+      assert has_element?(view, "#product-item-#{product_1.id}", product_1.name)
+
+      letters = product_1.name |> String.slice(1..2)
+
+      view
+      |> form("#filter-by-name", %{name: letters})
+      |> render_submit()
+
+      assert has_element?(view, "#product-item-#{product_1.id}", product_1.name)
+    end
 
     test "sorting using url", %{conn: conn} do
       for _ <- 1..10, do: insert(:product)
