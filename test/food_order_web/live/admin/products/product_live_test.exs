@@ -19,6 +19,38 @@ defmodule FoodOrderWeb.Admin.Products.ProductLiveTest do
       assert has_element?(view, "[data-role=add-new-product]", "New")
     end
 
+    # Test pagination
+    # Test sort
+    # Test search
+
+    test "test pagination using url_params", %{conn: conn} do
+      [product_1, product_2] = for _ <- 1..2, do: insert(:product)
+
+      {:ok, view, _html} = live(conn, "/admin/products?page=1&per_page=1")
+
+      assert has_element?(view, "#product-item-#{product_1.id}")
+      assert has_element?(view, "#product-item-#{product_1.id}", product_1.name)
+      assert has_element?(view, "#product-item-#{product_1.id}", Money.to_string(product_1.price))
+      assert has_element?(view, "#product-item-#{product_1.id}", product_1.size)
+
+      refute has_element?(view, "#product-item-#{product_2.id}")
+      refute has_element?(view, "#product-item-#{product_2.id}", product_2.name)
+      refute has_element?(view, "#product-item-#{product_2.id}", Money.to_string(product_2.price))
+      refute has_element?(view, "#product-item-#{product_2.id}", product_2.size)
+
+      {:ok, view, _html} = live(conn, "/admin/products?page=2&per_page=1")
+
+      assert has_element?(view, "#product-item-#{product_2.id}")
+      assert has_element?(view, "#product-item-#{product_2.id}", product_2.name)
+      assert has_element?(view, "#product-item-#{product_2.id}", Money.to_string(product_2.price))
+      assert has_element?(view, "#product-item-#{product_2.id}", product_2.size)
+
+      refute has_element?(view, "#product-item-#{product_1.id}")
+      refute has_element?(view, "#product-item-#{product_1.id}", product_1.name)
+      refute has_element?(view, "#product-item-#{product_1.id}", Money.to_string(product_1.price))
+      refute has_element?(view, "#product-item-#{product_1.id}", product_1.size)
+    end
+
     test "trigger new product", %{conn: conn} do
       product = insert(:product)
 
