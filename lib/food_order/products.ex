@@ -10,7 +10,6 @@ defmodule FoodOrder.Products do
 
   def list_products(criteria) when is_list(criteria) do
     query = from(p in Product)
-    IO.inspect criteria
 
     criteria
     |> Enum.reduce(query, fn
