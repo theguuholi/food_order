@@ -4,6 +4,8 @@ defmodule FoodOrderWeb.Admin.Products.ProductLiveTest do
   import FoodOrder.Factory
   import Phoenix.LiveViewTest
 
+  alias FoodOrder.Products
+
   describe "test products" do
     setup :register_and_log_in_user
 
@@ -19,8 +21,35 @@ defmodule FoodOrderWeb.Admin.Products.ProductLiveTest do
       assert has_element?(view, "[data-role=add-new-product]", "New")
     end
 
-    # Test sort
     # Test search
+
+    test "sorting using url", %{conn: conn} do
+      for _ <- 1..10, do: insert(:product)
+      filter = [sort: %{sort_by: :name, sort_order: :desc}]
+      [product_1 | product_2] = Products.list_products(filter)
+
+      {:ok, view, _} =
+        live(conn, "/admin/products?page=2&per_page=2&sort_by=name&sort_order=desc")
+
+      assert has_element?(view, "#product-item-#{product_1.id}", product_1.name)
+      assert has_element?(view, "#product-item-#{product_2.id}", product_2.name)
+    end
+
+    test "clicking sorting by patches", %{conn: conn} do
+      {:ok, view, _} = live(conn, "/admin/products")
+
+      view
+      |> element("[data-role=sort][data-id=name]", "Name")
+      |> render_click()
+
+      assert_patched(view, "/admin/products?page=1&per_page=4&sort_by=name&sort_order=asc")
+
+      view
+      |> element("[data-role=sort][data-id=name]", "Name")
+      |> render_click()
+
+      assert_patched(view, "/admin/products?page=1&per_page=4&sort_by=name&sort_order=desc")
+    end
 
     test "clicking next, previous, and page a", %{conn: conn} do
       {:ok, view, _html} = live(conn, "/admin/products?page=1&per_page=1")

@@ -4,7 +4,10 @@
         per_page: @options.per_page,
         sort_by: @sort_by,
         sort_order: @sort_order
-        ) do %>
+        ),
+        "data-role": "sort",
+        "data-id": @sort_by
+         do %>
     <div class="flex">
         <span class="pr-2"><%= humanize(@sort_by) %></span>
         <%= render FoodOrderWeb.IconView, @icon, %{color: @color} %>
