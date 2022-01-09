@@ -1,5 +1,5 @@
 <%= if @live_action in [:new, :edit] do %>
-<%= live_modal new_product(),
+<%= live_modal NewProductComponent,
     id: @product.id || :new,
     title: @page_title,
     action: @live_action,
@@ -9,10 +9,21 @@
 
 
 <header class="flex justify-between py-3 mx-auto p-6 items-center border-b border-gray-200">
-    <%= live_component filter_by_name(), id: "filter_by_name" %>
-    <%= live_component paginate(), id: "products-paginate", paginate: @paginate %>
+    <%= live_component FilterByName, id: "filter_by_name", name: @name, loading: @loading %>
+    <%= live_component Paginate, id: "products-paginate", options: @options, name: @name %>
 </header>
 
+<%= if @loading do %>
+<div class="py-3 flex justify-center">
+    <div
+        class="animate-bounce bg-white dark:bg-gray-800 p-2 w-10 h-10 ring-1 ring-gray-900/5 dark:ring-gray-200/20 shadow-lg rounded-full flex items-center justify-center">
+        <svg class="w-6 h-6 text-violet-500" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            viewBox="0 0 24 24" stroke="currentColor">
+            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+        </svg>
+    </div>
+</div>
+<% end %>
 
 <section class="container mx-auto p-6 font-mono" data-role="product-section">
     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
@@ -21,8 +32,12 @@
                 <thead>
                     <tr
                         class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
-                        <th class="px-4 py-3" data-role="head-name">Name</th>
-                        <th class="px-4 py-3" data-role="head-price">Price</th>
+                        <th class="px-4 py-3" data-role="head-name">
+                            <%= live_component @socket, SortHeader, id: :sort_by_name, options: @options, sort_by: :name, name: @name %>
+                        </th>
+                        <th class="px-4 py-3" data-role="head-price">
+                            <%= live_component @socket, SortHeader, id: :sort_by_price, options: @options, sort_by: :price, name: @name %>
+                        </th>
                         <th class="px-4 py-3" data-role="head-size">Size</th>
                         <th class="px-4 py-3" data-role="head-actions">
                             Actions
@@ -32,7 +47,7 @@
                 </thead>
                 <tbody class="bg-white" id="product-list">
                     <%= for product <- @products do %>
-                    <%= live_component @socket, product_item(), id: product.id, product: product %>
+                    <%= live_component @socket, ProductItemComponent, id: product.id, product: product %>
                     <% end %>
                 </tbody>
             </table>
