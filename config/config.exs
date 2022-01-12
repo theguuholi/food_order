@@ -31,6 +31,8 @@ config :food_order, FoodOrderWeb.Endpoint,
 # at the `config/runtime.exs`.
 config :food_order, FoodOrder.Mailer, adapter: Swoosh.Adapters.Local
 
+config :stripity_stripe, api_key: System.get_env("STRIPE_SECRET")
+
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
 

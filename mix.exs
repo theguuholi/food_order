@@ -68,7 +68,8 @@ defmodule FoodOrder.MixProject do
       {:faker, "~> 0.16", only: [:test, :dev]},
       {:ex_machina, "~> 2.7.0"},
       {:benchee, "~> 1.0", only: :dev},
-      {:timex, "~> 3.7.6"}
+      {:timex, "~> 3.7.6"},
+      {:stripity_stripe, "~> 2.0"}
     ]
   end
 
